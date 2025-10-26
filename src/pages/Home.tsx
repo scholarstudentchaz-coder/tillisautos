@@ -1,0 +1,146 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
+import { Sparkles, Car, Wrench, CheckCircle2 } from "lucide-react";
+
+const Home = () => {
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-[600px] bg-gradient-to-br from-primary via-primary/90 to-primary/80 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMCA0YzAgMi4yMS0xLjc5IDQtNCA0cy00LTEuNzktNC00IDEuNzktNCA0LTQgNCAxLjc5IDQgNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"></div>
+        
+        <div className="container mx-auto px-4 text-center relative z-10 animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6">
+            Tillis Auto Aesthetics
+          </h1>
+          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
+            Professional Detailing & Automotive Restoration Excellence
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/booking">
+              <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
+                <Sparkles className="mr-2 h-5 w-5" />
+                Book a Detail
+              </Button>
+            </Link>
+            <Link to="/cars-for-sale">
+              <Button size="lg" variant="outline" className="text-lg px-8 py-6 bg-primary-foreground/10 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                <Car className="mr-2 h-5 w-5" />
+                View Cars for Sale
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Overview */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">What We Offer</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-4">
+                  <Sparkles className="h-8 w-8 text-accent-foreground" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Professional Detailing</h3>
+                <p className="text-muted-foreground mb-4">
+                  Full interior and exterior detailing services that bring your vehicle back to showroom condition.
+                </p>
+                <ul className="space-y-2">
+                  {["Ceramic Coating", "Headlight Restoration", "Scratch Removal", "Engine Bay Cleaning"].map((service) => (
+                    <li key={service} className="flex items-center gap-2 text-sm">
+                      <CheckCircle2 className="h-4 w-4 text-accent" />
+                      <span>{service}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/services">
+                  <Button className="mt-6 w-full">Learn More</Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-4">
+                  <Wrench className="h-8 w-8 text-accent-foreground" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Flipping Division</h3>
+                <p className="text-muted-foreground mb-4">
+                  We buy, restore, and sell quality vehicles with meticulous attention to detail and craftsmanship.
+                </p>
+                <ul className="space-y-2">
+                  {["Complete Restoration", "Quality Assurance", "Transparent Process", "Fair Pricing"].map((feature) => (
+                    <li key={feature} className="flex items-center gap-2 text-sm">
+                      <CheckCircle2 className="h-4 w-4 text-accent" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/flipping">
+                  <Button className="mt-6 w-full">View Our Work</Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">Why Choose Tillis Auto Aesthetics</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Quality Craftsmanship",
+                description: "Every detail matters. We treat your vehicle as if it were our own.",
+              },
+              {
+                title: "Experienced Professional",
+                description: "Years of passion and expertise in automotive detailing and restoration.",
+              },
+              {
+                title: "Customer Satisfaction",
+                description: "Your satisfaction is our priority. We deliver results that exceed expectations.",
+              },
+            ].map((item) => (
+              <Card key={item.title} className="text-center">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Vehicle?</h2>
+          <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
+            Book your detailing service today or browse our selection of restored vehicles.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/booking">
+              <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
+                Book Now
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                Contact Us
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;
