@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.jpg";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,8 +28,8 @@ const Navigation = () => {
         <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-end gap-2 text-sm">
             <Phone className="h-4 w-4" />
-            <a href="tel:+1234567890" className="hover:underline font-medium">
-              (123) 456-7890
+            <a href="tel:3109917416" className="hover:underline font-medium">
+              (310) 991-7416
             </a>
           </div>
         </div>
@@ -37,11 +38,9 @@ const Navigation = () => {
       {/* Main Navigation */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo Placeholder */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">TA</span>
-            </div>
+            <img src={logo} alt="Tillis Auto Aesthetics" className="w-12 h-12 rounded-lg object-cover" />
             <span className="font-bold text-xl text-foreground hidden md:block">
               Tillis Auto Aesthetics
             </span>

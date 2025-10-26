@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Youtube } from "lucide-react";
+import { Phone, Mail, Clock, Facebook, Instagram, Youtube } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -32,10 +32,10 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
+      <section className="py-20 bg-gradient-to-br from-primary to-primary/80 text-white">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-6 animate-fade-in">Contact Us</h1>
-          <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Get in touch with us for any questions, bookings, or inquiries
           </p>
         </div>
@@ -118,8 +118,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">Phone</h4>
-                      <a href="tel:+1234567890" className="text-muted-foreground hover:text-accent">
-                        (123) 456-7890
+                      <a href="tel:3109917416" className="text-muted-foreground hover:text-accent">
+                        (310) 991-7416
                       </a>
                       <p className="text-sm text-muted-foreground mt-1">
                         Call or text anytime
@@ -133,24 +133,11 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">Email</h4>
-                      <a href="mailto:info@tillisauto.com" className="text-muted-foreground hover:text-accent">
-                        info@tillisauto.com
+                      <a href="mailto:tillisautoaesthetics@gmail.com" className="text-muted-foreground hover:text-accent">
+                        tillisautoaesthetics@gmail.com
                       </a>
                       <p className="text-sm text-muted-foreground mt-1">
                         We'll respond within 24 hours
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-6 w-6 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Location</h4>
-                      <p className="text-muted-foreground">Your Location Here</p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Serving the local area
                       </p>
                     </div>
                   </div>
@@ -181,7 +168,7 @@ const Contact = () => {
                   </p>
                   <div className="flex gap-4">
                     <a
-                      href="https://instagram.com"
+                      href="https://www.instagram.com/tillisautoaesthetics?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full bg-accent hover:bg-accent/80 flex items-center justify-center transition-colors"
@@ -189,7 +176,7 @@ const Contact = () => {
                       <Instagram className="h-6 w-6 text-accent-foreground" />
                     </a>
                     <a
-                      href="https://facebook.com"
+                      href="https://www.facebook.com/profile.php?id=61572672301525&mibextid=wwXIfr"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full bg-accent hover:bg-accent/80 flex items-center justify-center transition-colors"
@@ -197,7 +184,7 @@ const Contact = () => {
                       <Facebook className="h-6 w-6 text-accent-foreground" />
                     </a>
                     <a
-                      href="https://youtube.com"
+                      href="https://www.youtube.com/@tar6a"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full bg-accent hover:bg-accent/80 flex items-center justify-center transition-colors"

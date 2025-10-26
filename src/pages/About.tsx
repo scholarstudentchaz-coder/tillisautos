@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Heart, Users } from "lucide-react";
+import chazPortrait from "@/assets/chaz-portrait.jpg";
 
 const About = () => {
   return (
@@ -35,11 +36,12 @@ const About = () => {
                   detailing services with our unique flipping division, where we restore vehicles to their former glory.
                 </p>
               </div>
-              <div className="bg-muted rounded-lg h-96 flex items-center justify-center">
-                <div className="text-center text-muted-foreground">
-                  <p className="font-medium">Your photo will go here</p>
-                  <p className="text-sm mt-2">Professional portrait of Chaz Tillis</p>
-                </div>
+              <div className="rounded-lg h-96 overflow-hidden">
+                <img 
+                  src={chazPortrait} 
+                  alt="Chaz Tillis - Founder of Tillis Auto Aesthetics" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
