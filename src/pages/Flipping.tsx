@@ -1,26 +1,33 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2 } from "lucide-react";
+import bmw328i from "@/assets/bmw-328i.png";
+import chargerSrt8 from "@/assets/charger-srt8.png";
+import e550Coupe from "@/assets/e550-coupe.png";
 
 const Flipping = () => {
   const projects = [
     {
-      title: "2015 Honda Accord EX-L",
-      before: "Purchased with worn interior and dull paint",
-      work: "Complete interior restoration, full paint correction, ceramic coating, mechanical inspection",
-      result: "Sold within 2 weeks at 25% above market value",
+      title: "2010 BMW 328i",
+      before: "Purchased with cheap partial repair work",
+      work: "Complete proper repair - replaced brakes, interior speakers, front bumper paint, and new hood",
+      result: "Restored to proper condition and successfully sold",
+      image: bmw328i,
     },
     {
-      title: "2018 Ford Mustang GT",
-      before: "Minor accident damage, neglected maintenance",
-      work: "Body repair, paint matching, engine detailing, complete mechanical service",
-      result: "Restored to pristine condition, satisfied buyer testimonial",
+      title: "2007 Dodge Charger SRT8",
+      before: "Non-functional door handle",
+      work: "Full professional detail and door handle replacement",
+      result: "Restored to full functionality and sold",
+      image: chargerSrt8,
     },
     {
-      title: "2016 Chevrolet Silverado 1500",
-      before: "High mileage work truck with heavy wear",
-      work: "Deep cleaning, seat repair, paint touch-ups, undercarriage treatment",
-      result: "Successfully flipped to a contractor looking for reliable work truck",
+      title: "2010 Mercedes E550 Coupe",
+      before: "Cosmetic wear and mechanical issues",
+      work: "Front bumper paint, new grille, reupholstered front seats, replaced sway bar links, power steering pump, and PCV system",
+      result: "Currently available for sale - see Cars for Sale page",
+      image: e550Coupe,
+      available: true,
     },
   ];
 
@@ -70,17 +77,23 @@ const Flipping = () => {
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Image Placeholder */}
-                    <div className="bg-muted-foreground/10 h-80 md:h-auto flex items-center justify-center md:rounded-l-lg">
-                      <div className="text-center text-muted-foreground">
-                        <p className="font-medium">Before/After Collage</p>
-                        <p className="text-sm mt-2">{project.title}</p>
-                      </div>
+                    {/* Project Image */}
+                    <div className="h-80 md:h-auto overflow-hidden md:rounded-l-lg">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     
                     {/* Content */}
                     <div className="p-6 md:p-8">
-                      <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
+                      <div className="flex items-center gap-3 mb-4">
+                        <h3 className="text-2xl font-bold">{project.title}</h3>
+                        {project.available && (
+                          <Badge className="bg-accent text-accent-foreground">For Sale</Badge>
+                        )}
+                      </div>
                       
                       <div className="space-y-4">
                         <div>

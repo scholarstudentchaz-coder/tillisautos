@@ -3,24 +3,24 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Calendar, Gauge, Fuel, CheckCircle2 } from "lucide-react";
+import e550Coupe from "@/assets/e550-coupe.png";
 
 const CarsForSale = () => {
-  // Placeholder for current inventory
   const inventory = [
     {
-      title: "2017 Honda Civic EX",
-      price: "$16,500",
-      year: "2017",
-      mileage: "62,000",
-      features: ["One Owner", "Clean Title", "Full Service History", "Recently Detailed"],
+      title: "2010 Mercedes E550 Coupe",
+      price: "$7,250",
+      year: "2010",
+      mileage: "Contact for details",
+      features: ["Two Owners", "Clean Title", "Full Service History", "Recently Detailed"],
       highlights: [
-        "Excellent fuel economy",
-        "Reliable Honda engine",
+        "382 Horsepower Reliable 5.5L V8 Engine",
         "Modern safety features",
-        "Pristine interior condition",
+        "Moderate interior condition",
+        "Recent restoration work completed - front bumper paint, new grille, reupholstered front seats, replaced sway bar links, power steering pump, and PCV system",
       ],
+      image: e550Coupe,
     },
-    // Add more cars as they become available
   ];
 
   return (
@@ -44,12 +44,13 @@ const CarsForSale = () => {
               {inventory.map((car, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-0">
-                    {/* Image Gallery Placeholder */}
-                    <div className="bg-muted h-80 rounded-t-lg flex items-center justify-center">
-                      <div className="text-center text-muted-foreground">
-                        <p className="font-medium">Car Photos</p>
-                        <p className="text-sm mt-2">{car.title}</p>
-                      </div>
+                    {/* Car Image */}
+                    <div className="h-80 rounded-t-lg overflow-hidden">
+                      <img 
+                        src={car.image} 
+                        alt={car.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     
                     <div className="p-6">
