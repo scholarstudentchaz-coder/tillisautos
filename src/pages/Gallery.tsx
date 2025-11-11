@@ -70,73 +70,10 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Featured Project - E350 */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Featured Project</h2>
-          <Card className="max-w-6xl mx-auto">
-            <CardContent className="p-0">
-              <div className="p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <h3 className="text-3xl font-bold">{featuredProject.title}</h3>
-                  <Badge className="text-base px-3 py-1">{featuredProject.service}</Badge>
-                </div>
-                
-                <div className="space-y-8">
-                  {/* Before */}
-                  <div>
-                    <h4 className="text-xl font-semibold mb-4 text-primary">Before</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <img 
-                        src={featuredProject.images.beforeFront} 
-                        alt="E350 before - front view"
-                        className="w-full h-80 object-cover rounded-lg"
-                      />
-                      <img 
-                        src={featuredProject.images.beforeBack} 
-                        alt="E350 before - back view"
-                        className="w-full h-80 object-cover rounded-lg"
-                      />
-                    </div>
-                  </div>
-
-                  {/* During - Foamed Up */}
-                  <div>
-                    <h4 className="text-xl font-semibold mb-4 text-primary">Foamed Up</h4>
-                    <img 
-                      src={featuredProject.images.foamed} 
-                      alt="E350 foamed up during wash"
-                      className="w-full h-96 object-cover rounded-lg"
-                    />
-                  </div>
-
-                  {/* After */}
-                  <div>
-                    <h4 className="text-xl font-semibold mb-4 text-primary">After</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <img 
-                        src={featuredProject.images.afterFront} 
-                        alt="E350 after - front view"
-                        className="w-full h-80 object-cover rounded-lg"
-                      />
-                      <img 
-                        src={featuredProject.images.afterBack} 
-                        alt="E350 after - back view"
-                        className="w-full h-80 object-cover rounded-lg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
       {/* Gallery Grid */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">More Projects</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">Previous Work</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">

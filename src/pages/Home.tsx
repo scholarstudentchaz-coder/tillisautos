@@ -1,14 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Sparkles, Car, Wrench, CheckCircle2 } from "lucide-react";
+import heroImage from "@/assets/hero-detailing.jpg";
+import e350FrontDirty from "@/assets/e350-front-dirty.jpg";
+import e350BackDirty from "@/assets/e350-back-dirty.jpg";
+import e350Foam from "@/assets/e350-foam.jpg";
+import e350FrontClean from "@/assets/e350-front-clean.jpg";
+import e350BackClean from "@/assets/e350-back-clean.jpg";
 
 const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[600px] bg-gradient-to-br from-primary via-primary/90 to-primary/80 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMCA0YzAgMi4yMS0xLjc5IDQtNCA0cy00LTEuNzktNC00IDEuNzktNCA0LTQgNCAxLjc5IDQgNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"></div>
+      <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroImage} alt="Professional auto detailing" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/80"></div>
+        </div>
         
         <div className="container mx-auto px-4 text-center relative z-10 animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6">
@@ -31,6 +41,75 @@ const Home = () => {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Featured Previous Work */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">Previous Work</h2>
+          <Card className="max-w-6xl mx-auto">
+            <CardContent className="p-0">
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <h3 className="text-3xl font-bold">2015 Mercedes-Benz E350</h3>
+                  <Badge className="text-base px-3 py-1">Basic Exterior Renewal</Badge>
+                </div>
+                
+                <div className="space-y-8">
+                  {/* Before */}
+                  <div>
+                    <h4 className="text-xl font-semibold mb-4 text-primary">Before</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <img 
+                        src={e350FrontDirty} 
+                        alt="E350 before - front view"
+                        className="w-full h-80 object-cover rounded-lg"
+                      />
+                      <img 
+                        src={e350BackDirty} 
+                        alt="E350 before - back view"
+                        className="w-full h-80 object-cover rounded-lg"
+                      />
+                    </div>
+                  </div>
+
+                  {/* During - Foamed Up */}
+                  <div>
+                    <h4 className="text-xl font-semibold mb-4 text-primary">Foamed Up</h4>
+                    <img 
+                      src={e350Foam} 
+                      alt="E350 foamed up during wash"
+                      className="w-full h-96 object-cover rounded-lg"
+                    />
+                  </div>
+
+                  {/* After */}
+                  <div>
+                    <h4 className="text-xl font-semibold mb-4 text-primary">After</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <img 
+                        src={e350FrontClean} 
+                        alt="E350 after - front view"
+                        className="w-full h-80 object-cover rounded-lg"
+                      />
+                      <img 
+                        src={e350BackClean} 
+                        alt="E350 after - back view"
+                        className="w-full h-80 object-cover rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 text-center">
+                  <Link to="/gallery">
+                    <Button size="lg">View All Previous Work</Button>
+                  </Link>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 

@@ -23,18 +23,6 @@ const Navigation = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
-      {/* Top Bar with Phone */}
-      <div className="bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex items-center justify-end gap-2 text-sm">
-            <Phone className="h-4 w-4" />
-            <a href="tel:3109917416" className="hover:underline font-medium">
-              (310) 991-7416
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navigation */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
