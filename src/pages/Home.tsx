@@ -22,9 +22,7 @@ const Home = () => {
           <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6">
             Tillis Auto Aesthetics
           </h1>
-          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-            Professional Detailing & Automotive Restoration Excellence
-          </p>
+          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">Your Complete Car Care Solution!</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/booking">
               <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
@@ -51,7 +49,9 @@ const Home = () => {
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-6">
                   <h3 className="text-3xl font-bold">2015 Mercedes-Benz E350</h3>
-                  <Badge className="text-base px-3 py-1">Basic Exterior Renewal</Badge>
+                  <Badge className="text-base px-3 py-1">
+
+Exterior Renewal</Badge>
                 </div>
                 
                 <div className="space-y-8">
