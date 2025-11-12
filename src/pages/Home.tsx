@@ -9,10 +9,8 @@ import e350BackDirty from "@/assets/e350-back-dirty.jpg";
 import e350Foam from "@/assets/e350-foam.jpg";
 import e350FrontClean from "@/assets/e350-front-clean.jpg";
 import e350BackClean from "@/assets/e350-back-clean.jpg";
-
 const Home = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -61,43 +59,23 @@ const Home = () => {
                   <div>
                     <h4 className="text-xl font-semibold mb-4 text-primary">Before</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <img 
-                        src={e350FrontDirty} 
-                        alt="E350 before - front view"
-                        className="w-full h-80 object-cover rounded-lg"
-                      />
-                      <img 
-                        src={e350BackDirty} 
-                        alt="E350 before - back view"
-                        className="w-full h-80 object-cover rounded-lg"
-                      />
+                      <img src={e350FrontDirty} alt="E350 before - front view" className="w-full h-80 object-cover rounded-lg" />
+                      <img src={e350BackDirty} alt="E350 before - back view" className="w-full h-80 object-cover rounded-lg" />
                     </div>
                   </div>
 
                   {/* During - Foamed Up */}
                   <div>
                     <h4 className="text-xl font-semibold mb-4 text-primary">Foamed Up</h4>
-                    <img 
-                      src={e350Foam} 
-                      alt="E350 foamed up during wash"
-                      className="w-full h-96 object-cover rounded-lg"
-                    />
+                    <img src={e350Foam} alt="E350 foamed up during wash" className="w-full h-96 object-cover rounded-lg" />
                   </div>
 
                   {/* After */}
                   <div>
                     <h4 className="text-xl font-semibold mb-4 text-primary">After</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <img 
-                        src={e350FrontClean} 
-                        alt="E350 after - front view"
-                        className="w-full h-80 object-cover rounded-lg"
-                      />
-                      <img 
-                        src={e350BackClean} 
-                        alt="E350 after - back view"
-                        className="w-full h-80 object-cover rounded-lg"
-                      />
+                      <img src={e350FrontClean} alt="E350 after - front view" className="w-full h-80 object-cover rounded-lg" />
+                      <img src={e350BackClean} alt="E350 after - back view" className="w-full h-80 object-cover rounded-lg" />
                     </div>
                   </div>
                 </div>
@@ -128,12 +106,10 @@ const Home = () => {
                   Full interior and exterior detailing services that bring your vehicle back to showroom condition.
                 </p>
                 <ul className="space-y-2">
-                  {["Ceramic Coating", "Headlight Restoration", "Scratch Removal", "Engine Bay Cleaning"].map((service) => (
-                    <li key={service} className="flex items-center gap-2 text-sm">
+                  {["Ceramic Coating", "Headlight Restoration", "Scratch Removal", "Engine Bay Cleaning"].map(service => <li key={service} className="flex items-center gap-2 text-sm">
                       <CheckCircle2 className="h-4 w-4 text-accent" />
                       <span>{service}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
                 <Link to="/services">
                   <Button className="mt-6 w-full">Learn More</Button>
@@ -151,12 +127,10 @@ const Home = () => {
                   We buy, restore, and sell quality vehicles with meticulous attention to detail and craftsmanship.
                 </p>
                 <ul className="space-y-2">
-                  {["Complete Restoration", "Quality Assurance", "Transparent Process", "Fair Pricing"].map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm">
+                  {["Complete Restoration", "Quality Assurance", "Transparent Process", "Fair Pricing"].map(feature => <li key={feature} className="flex items-center gap-2 text-sm">
                       <CheckCircle2 className="h-4 w-4 text-accent" />
                       <span>{feature}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
                 <Link to="/flipping">
                   <Button className="mt-6 w-full">View Our Work</Button>
@@ -172,27 +146,21 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Why Choose Tillis Auto Aesthetics</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Quality Craftsmanship",
-                description: "Every detail matters. We treat your vehicle as if it were our own.",
-              },
-              {
-                title: "Experienced Professional",
-                description: "Years of passion and expertise in automotive detailing and restoration.",
-              },
-              {
-                title: "Customer Satisfaction",
-                description: "Your satisfaction is our priority. We deliver results that exceed expectations.",
-              },
-            ].map((item) => (
-              <Card key={item.title} className="text-center">
+            {[{
+            title: "Quality Craftsmanship",
+            description: "Every detail matters. We treat your vehicle as if it were our own."
+          }, {
+            title: "Experienced Professional",
+            description: "Years of passion and expertise in automotive detailing and restoration."
+          }, {
+            title: "Customer Satisfaction",
+            description: "Your satisfaction is our priority. We deliver results that exceed expectations."
+          }].map(item => <Card key={item.title} className="text-center">
                 <CardContent className="p-8">
                   <h3 className="text-xl font-bold mb-4">{item.title}</h3>
                   <p className="text-muted-foreground">{item.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -211,15 +179,11 @@ const Home = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                Contact Us
-              </Button>
+              
             </Link>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
