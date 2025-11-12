@@ -7,9 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Calendar, Clock, Car } from "lucide-react";
-
 const Booking = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,14 +19,13 @@ const Booking = () => {
     vehicleType: "",
     date: "",
     time: "",
-    message: "",
+    message: ""
   });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
       title: "Booking Request Received!",
-      description: "We'll contact you shortly to confirm your appointment.",
+      description: "We'll contact you shortly to confirm your appointment."
     });
     // Reset form
     setFormData({
@@ -36,16 +36,16 @@ const Booking = () => {
       vehicleType: "",
       date: "",
       time: "",
-      message: "",
+      message: ""
     });
   };
-
   const handleChange = (field: string, value: string) => {
-    setFormData({ ...formData, [field]: value });
+    setFormData({
+      ...formData,
+      [field]: value
+    });
   };
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
@@ -71,37 +71,17 @@ const Booking = () => {
                   <div className="space-y-4">
                     <div>
                       <Label htmlFor="name">Full Name *</Label>
-                      <Input
-                        id="name"
-                        required
-                        value={formData.name}
-                        onChange={(e) => handleChange("name", e.target.value)}
-                        placeholder="John Doe"
-                      />
+                      <Input id="name" required value={formData.name} onChange={e => handleChange("name", e.target.value)} placeholder="John Doe" />
                     </div>
 
                     <div>
                       <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => handleChange("email", e.target.value)}
-                        placeholder="john@example.com"
-                      />
+                      <Input id="email" type="email" required value={formData.email} onChange={e => handleChange("email", e.target.value)} placeholder="john@example.com" />
                     </div>
 
                     <div>
                       <Label htmlFor="phone">Phone Number *</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => handleChange("phone", e.target.value)}
-                        placeholder="(123) 456-7890"
-                      />
+                      <Input id="phone" type="tel" required value={formData.phone} onChange={e => handleChange("phone", e.target.value)} placeholder="(123) 456-7890" />
                     </div>
                   </div>
 
@@ -109,11 +89,7 @@ const Booking = () => {
                   <div className="space-y-4">
                     <div>
                       <Label htmlFor="serviceType">Service Type *</Label>
-                      <Select
-                        required
-                        value={formData.serviceType}
-                        onValueChange={(value) => handleChange("serviceType", value)}
-                      >
+                      <Select required value={formData.serviceType} onValueChange={value => handleChange("serviceType", value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
@@ -131,11 +107,7 @@ const Booking = () => {
 
                     <div>
                       <Label htmlFor="vehicleType">Vehicle Type *</Label>
-                      <Select
-                        required
-                        value={formData.vehicleType}
-                        onValueChange={(value) => handleChange("vehicleType", value)}
-                      >
+                      <Select required value={formData.vehicleType} onValueChange={value => handleChange("vehicleType", value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select vehicle type" />
                         </SelectTrigger>
@@ -153,37 +125,19 @@ const Booking = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="date">Preferred Date *</Label>
-                      <Input
-                        id="date"
-                        type="date"
-                        required
-                        value={formData.date}
-                        onChange={(e) => handleChange("date", e.target.value)}
-                      />
+                      <Input id="date" type="date" required value={formData.date} onChange={e => handleChange("date", e.target.value)} />
                     </div>
 
                     <div>
                       <Label htmlFor="time">Preferred Time *</Label>
-                      <Input
-                        id="time"
-                        type="time"
-                        required
-                        value={formData.time}
-                        onChange={(e) => handleChange("time", e.target.value)}
-                      />
+                      <Input id="time" type="time" required value={formData.time} onChange={e => handleChange("time", e.target.value)} />
                     </div>
                   </div>
 
                   {/* Additional Notes */}
                   <div>
                     <Label htmlFor="message">Additional Notes (Optional)</Label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => handleChange("message", e.target.value)}
-                      placeholder="Any specific concerns or requests?"
-                      rows={4}
-                    />
+                    <Textarea id="message" value={formData.message} onChange={e => handleChange("message", e.target.value)} placeholder="Any specific concerns or requests?" rows={4} />
                   </div>
 
                   <Button type="submit" size="lg" className="w-full">
@@ -245,25 +199,12 @@ const Booking = () => {
               </Card>
 
               <Card className="bg-accent text-accent-foreground">
-                <CardContent className="p-6">
-                  <h4 className="font-bold text-lg mb-2">Need Help?</h4>
-                  <p className="text-sm mb-4">
-                    Have questions about our services? Give us a call!
-                  </p>
-                  <a
-                    href="tel:+1234567890"
-                    className="inline-flex items-center justify-center font-bold text-lg hover:underline"
-                  >
-                    (123) 456-7890
-                  </a>
-                </CardContent>
+                
               </Card>
             </div>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Booking;
