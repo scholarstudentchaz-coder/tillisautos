@@ -11,7 +11,6 @@ import Gallery from "./pages/Gallery";
 import Flipping from "./pages/Flipping";
 import CarsForSale from "./pages/CarsForSale";
 import Booking from "./pages/Booking";
-import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,7 +30,6 @@ const App = () => (
             <Route path="/flipping" element={<Flipping />} />
             <Route path="/cars-for-sale" element={<CarsForSale />} />
             <Route path="/booking" element={<Booking />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
