@@ -12,8 +12,7 @@ const Navigation = () => {
     { name: "Home", path: "/" },
     { name: "Detailing Services", path: "/services" },
     { name: "Previous Work", path: "/gallery" },
-    { name: "Flipping Division", path: "/flipping" },
-    { name: "Cars for Sale", path: "/cars-for-sale" },
+    { name: "Vehicle Restoration", path: "/flipping" },
     { name: "Booking", path: "/booking" },
     { name: "About Us", path: "/about" },
   ];
