@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import bmw328i from "@/assets/bmw-328i.png";
 import chargerSrt8 from "@/assets/charger-srt8.png";
 import e550Coupe from "@/assets/e550-coupe.png";
@@ -11,23 +13,33 @@ const Flipping = () => {
       title: "2010 BMW 328i",
       before: "Purchased with cheap partial repair work",
       work: "Complete proper repair - replaced brakes, interior speakers, front bumper paint, and new hood",
-      result: "Restored to proper condition and successfully sold",
+      result: "Restored to proper condition",
       image: bmw328i,
+      sold: true,
     },
     {
       title: "2007 Dodge Charger SRT8",
       before: "Non-functional door handle",
       work: "Full professional detail and door handle replacement",
-      result: "Restored to full functionality and sold",
+      result: "Restored to full functionality",
       image: chargerSrt8,
+      sold: true,
     },
     {
       title: "2010 Mercedes E550 Coupe",
       before: "Cosmetic wear and mechanical issues",
       work: "Front bumper paint, new grille, reupholstered front seats, replaced sway bar links, power steering pump, and PCV system",
-      result: "Currently available for sale - see Cars for Sale page",
+      result: "Professional restoration completed",
+      price: "$7,250",
+      features: ["Two Owners", "Clean Title", "Full Service History"],
+      highlights: [
+        "382 Horsepower Reliable 5.5L V8 Engine",
+        "Modern safety features",
+        "Moderate interior condition",
+        "Complete restoration work finished",
+      ],
       image: e550Coupe,
-      available: true,
+      sold: true,
     },
   ];
 
@@ -36,7 +48,7 @@ const Flipping = () => {
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 animate-fade-in">Flipping Division</h1>
+          <h1 className="text-5xl font-bold mb-6 animate-fade-in">Vehicle Restoration & Sales</h1>
           <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
             We buy, restore, and sell quality vehicles with meticulous attention to detail
           </p>
@@ -71,29 +83,35 @@ const Flipping = () => {
       {/* Projects Showcase */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Completed Projects</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">Our Projects</h2>
           <div className="space-y-8 max-w-5xl mx-auto">
             {projects.map((project, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Project Image */}
-                    <div className="h-80 md:h-auto overflow-hidden md:rounded-l-lg">
+                    <div className="h-80 md:h-auto overflow-hidden md:rounded-l-lg relative">
                       <img 
                         src={project.image} 
                         alt={project.title}
                         className="w-full h-full object-cover"
                       />
+                      {project.sold && (
+                        <div className="absolute top-4 right-4">
+                          <Badge className="bg-red-500 text-white text-lg px-4 py-2">SOLD</Badge>
+                        </div>
+                      )}
                     </div>
                     
                     {/* Content */}
                     <div className="p-6 md:p-8">
                       <div className="flex items-center gap-3 mb-4">
                         <h3 className="text-2xl font-bold">{project.title}</h3>
-                        {project.available && (
-                          <Badge className="bg-accent text-accent-foreground">For Sale</Badge>
-                        )}
                       </div>
+                      
+                      {project.price && (
+                        <p className="text-2xl font-bold text-accent mb-4">{project.price}</p>
+                      )}
                       
                       <div className="space-y-4">
                         <div>
@@ -113,6 +131,33 @@ const Flipping = () => {
                           </div>
                           <p className="text-muted-foreground">{project.result}</p>
                         </div>
+
+                        {project.features && (
+                          <div>
+                            <Badge className="mb-2">Features</Badge>
+                            <div className="flex flex-wrap gap-2 mt-2">
+                              {project.features.map((feature) => (
+                                <Badge key={feature} variant="secondary">
+                                  {feature}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {project.highlights && (
+                          <div>
+                            <Badge className="mb-2">Highlights</Badge>
+                            <div className="space-y-2 mt-2">
+                              {project.highlights.map((highlight) => (
+                                <div key={highlight} className="flex items-start gap-2 text-sm">
+                                  <CheckCircle2 className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" />
+                                  <span className="text-muted-foreground">{highlight}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -123,8 +168,38 @@ const Flipping = () => {
         </div>
       </section>
 
-      {/* Commitment Section */}
+      {/* Why Buy From Us */}
       <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">Why Buy From Us?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                title: "Thoroughly Inspected",
+                description: "Every vehicle undergoes comprehensive mechanical and cosmetic inspection before sale.",
+              },
+              {
+                title: "Professionally Detailed",
+                description: "All cars receive our full detailing treatment, ensuring they look and feel like new.",
+              },
+              {
+                title: "Transparent History",
+                description: "Complete service records and vehicle history reports provided for peace of mind.",
+              },
+            ].map((item) => (
+              <Card key={item.title}>
+                <CardContent className="p-6 text-center">
+                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Commitment Section */}
+      <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">Our Commitment to Quality</h2>
@@ -145,6 +220,21 @@ const Flipping = () => {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6">Interested in Future Inventory?</h2>
+          <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
+            Contact us to learn more about upcoming restoration projects and available vehicles.
+          </p>
+          <Link to="/about">
+            <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
+              Get in Touch
+            </Button>
+          </Link>
         </div>
       </section>
     </div>
