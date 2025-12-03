@@ -19,8 +19,8 @@ const Footer = () => {
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
-                <a href="tel:3109917416" className="hover:underline">
-                  (310) 991-7416
+                <a href="tel:3107010263" className="hover:underline">
+                  (310) 701-0263
                 </a>
               </div>
               <div className="flex items-center gap-2">

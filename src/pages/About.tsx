@@ -127,8 +127,8 @@ const About = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Phone</h4>
-                    <a href="tel:3109917416" className="text-muted-foreground hover:text-accent">
-                      (310) 991-7416
+                    <a href="tel:3107010263" className="text-muted-foreground hover:text-accent">
+                      (310) 701-0263
                     </a>
                     <p className="text-sm text-muted-foreground mt-1">
                       Call or text anytime
