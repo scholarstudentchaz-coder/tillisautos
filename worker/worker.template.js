@@ -77,7 +77,7 @@ export default {
       body: form,
     });
     const s = await r.json();
-    if (!r.ok) return json({ error: "Could not start checkout" }, 502, origin);
+    if (!r.ok) return json({ error: "Could not start checkout", detail: (s.error && s.error.message) || r.status }, 502, origin);
     return json({ url: s.url }, 200, origin);
   },
 };
