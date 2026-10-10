@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block body %}<main style="max-width:900px"><h2>Send a dealer / broker invoice</h2>
+{% if msg %}<div class="msg ok">{{ msg }}</div>{% endif %}{% if err %}<div class="msg bad">{{ err }}</div>{% endif %}
+<form class="stack card" method="post" action="/admin/invoice">
+<div class="fgrid"><div><label>Name</label><input type="text" name="name" required></div><div><label>Company</label><input type="text" name="company"></div><div><label>Email (invoice sent here)</label><input type="email" name="email" required></div><div><label>Phone</label><input type="tel" name="phone"></div></div>
+<label>Vehicle(s) or note shown on invoice</label><input type="text" name="vehicle" placeholder="e.g. 3 cars, Hawthorne lot">
+<label>Line items</label>
+{% for i in range(1,5) %}<div class="fgrid" style="margin-bottom:8px"><select name="pkg{{ i }}"><option value="">Package {{ i }}...</option>{% for k,p in dealer.items() %}<option value="{{ k }}">{{ p.name }}</option>{% endfor %}</select>
+<select name="veh{{ i }}">{% for k,v in vehicles.items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select><input type="number" name="qty{{ i }}" min="1" value="1" placeholder="Qty"></div>{% endfor %}
+<label>Custom items (optional)</label>
+{% for i in range(1,3) %}<div class="fgrid" style="margin-bottom:8px"><input type="text" name="custom_desc{{ i }}" placeholder="Description"><input type="number" step="0.01" min="0" name="custom_amount{{ i }}" placeholder="Amount ($)"></div>{% endfor %}
+<label>Days until due</label><input type="number" name="days" value="14" min="1" style="max-width:120px"><br><br><button class="btn">Create &amp; email invoice</button></form>
+
+<h2 style="margin-top:40px">Website messages</h2>
+<table><tr><th>When</th><th>Type</th><th>Who</th><th>Contact</th><th>Message</th></tr>
+{% for l in leads %}<tr><td>{{ l.created }}</td><td>{{ l.kind }}</td><td>{{ l.name }}{% if l.company %}<br><span class="muted">{{ l.company }}</span>{% endif %}</td><td>{{ l.phone }}<br>{{ l.email }}</td><td>{{ l.message }}</td></tr>{% else %}<tr><td colspan="5" class="muted">No messages yet.</td></tr>{% endfor %}</table>
+
+<h2 style="margin-top:40px">Recent invoices</h2>
+<table><tr><th>Customer</th><th>Total</th><th>Status</th><th></th></tr>
+{% for i in invoices %}<tr><td>{{ i.customer_name or i.customer_email }}</td><td>${{ '%.2f'|format(i.total/100) }}</td><td>{{ i.status }}</td><td>{% if i.hosted_invoice_url %}<a href="{{ i.hosted_invoice_url }}" target="_blank">View</a>{% endif %}</td></tr>{% endfor %}</table></main>{% endblock %}

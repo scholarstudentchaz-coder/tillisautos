@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block body %}<main style="max-width:400px"><h2>Admin login</h2>
+{% if error %}<div class="msg bad">{{ error }}</div>{% endif %}
+<form class="stack" method="post"><label>Password</label><input type="password" name="password" autofocus><br><button class="btn">Log in</button></form></main>{% endblock %}

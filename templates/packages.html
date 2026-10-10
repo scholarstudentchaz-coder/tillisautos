@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% block title %}Car Detailing Packages &amp; Prices | Tillis Auto Aesthetics{% endblock %}{% block body %}
+<section class="pagehead"><h1>Packages &amp; prices</h1><p>Priced by vehicle size and condition. No surprises.</p></section>
+<main>
+<h2>1. Choose your vehicle</h2>
+<div class="sizes" id="sizes">{% for k,v in vehicles.items() %}<button type="button" data-v="{{ k }}" class="{{ 'on' if loop.first }}">{{ v }}</button>{% endfor %}</div>
+<div class="grid" style="margin-top:20px">{% for id,p in packages.items() %}
+<div class="card pkg {{ 'pop' if p.popular }}">{% if p.popular %}<span class="badge">MOST POPULAR</span>{% endif %}<div class="tag2">{{ p.tag }}</div><h3>{{ p.name }}</h3>
+<div class="big" data-pkg="{{ id }}">${{ p.prices.car }}</div><div class="note">starting price when lightly dirty · {{ p.time }}</div>
+<ul>{% for i in p.includes %}<li>{{ i }}</li>{% endfor %}</ul><a class="btn" data-track="book_tap" href="/book?package={{ id }}">Book {{ p.name }}</a></div>{% endfor %}</div>
+
+<h2 style="margin-top:56px">2. How dirty is it?</h2>
+<div class="grid">{% for k,c in conditions.items() %}<div class="card"><h3>{{ c.label }}</h3><p class="muted">{{ c.desc }}</p><b class="price">{% if c.mult==1 %}Base price{% else %}+{{ ((c.mult-1)*100)|round|int }}%{% endif %}</b></div>{% endfor %}</div>
+<p class="note">More time and product for dirtier cars. If your car is dirtier than selected, we talk to you before starting.</p>
+
+<h2 style="margin-top:56px">3. Optional add-ons</h2>
+<div class="grid">{% for k,a in addons.items() %}<div class="card"><h3>{{ a.name }}</h3><b class="price">${{ a.price }}</b>{% if k in premium_includes %}<p class="note">Included with Showroom Premium.</p>{% endif %}</div>{% endfor %}</div>
+
+<h2 style="margin-top:56px">All prices by vehicle size</h2>
+<div style="overflow-x:auto"><table class="cmp"><tr><th>Package (lightly dirty)</th>{% for v in vehicles.values() %}<th>{{ v }}</th>{% endfor %}</tr>
+{% for p in packages.values() %}<tr><td>{{ p.name }}</td>{% for k in vehicles %}<td>${{ p.prices[k] }}</td>{% endfor %}</tr>{% endfor %}
+<tr><td>Monthly plan (per month)</td>{% for k in vehicles %}<td>${{ membership.prices[k] }}</td>{% endfor %}</tr></table></div>
+<div class="cta"><h2>Know what you need?</h2><a class="btn" data-track="book_tap" href="/book">Book &amp; pay online</a> <a class="btn ghost" href="/faq">Read the FAQ</a></div>
+</main>
+<script>
+const P={{ packages|tojson }},C={{ conditions|tojson }};
+document.querySelectorAll('#sizes button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#sizes button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+document.querySelectorAll('[data-pkg]').forEach(e=>e.textContent='$'+P[e.dataset.pkg].prices[b.dataset.v])});
+</script>{% endblock %}

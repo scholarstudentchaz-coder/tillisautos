@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Mobile Car Detailing in {{ city }} | Tillis Auto Aesthetics{% endblock %}
+{% block desc %}Mobile car detailing in {{ city }}, CA. We come to you with our own water and power. Clear prices by vehicle size. Book online.{% endblock %}{% block body %}
+<section class="pagehead"><h1>Mobile car detailing in {{ city }}</h1><p>We come to your home, work or lot. Book online in minutes.</p></section>
+<main><div class="grid"><div class="card"><h3>We come to you in {{ city }}</h3><p class="muted">Our detailers bring their own water, power and products. Just tell us where to meet you.</p></div>
+<div class="card"><h3>Clear prices</h3><p class="muted">Full Detail starts at ${{ packages.full.prices.car }}. Priced by vehicle size and condition.</p></div>
+<div class="card"><h3>Easy booking</h3><p class="muted">Pick your package, pay securely, and we confirm a time.</p></div></div>
+<p style="margin-top:24px"><a class="btn" data-track="book_tap" href="/book">Book in {{ city }}</a> <a class="btn ghost" style="background:var(--navy)" href="/packages">See packages</a></p>
+<h2 style="margin-top:48px">Also serving</h2><div class="pills">{% for c in cities if c!=city %}<a href="/areas/{{ slug(c) }}">{{ c }}</a>{% endfor %}</div></main>{% endblock %}

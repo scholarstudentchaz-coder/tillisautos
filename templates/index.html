@@ -1,0 +1,42 @@
+{% extends "base.html" %}{% block body %}
+<section class="hero"><img class="logo-big" src="/static/img/logo.jpg" alt="Tillis Auto Aesthetics logo">
+<div><span class="tag">MOBILE DETAILING · SOUTH BAY</span></div>
+<h1>Showroom shine,<br>at your door.</h1><p>Mobile car detailing in Torrance, Redondo Beach, Manhattan Beach and all across the South Bay. Clear prices. Book online in minutes.</p>
+<a class="btn" data-track="book_tap" href="/book">Book &amp; Pay Online</a><a class="btn ghost" data-track="call_tap" href="{{ biz.tel }}">Call {{ biz.phone }}</a><a class="btn ghost" data-track="text_tap" href="{{ biz.sms }}">Text us</a></section>
+<main>
+<h2 class="reveal">Who we detail for</h2>
+<div class="grid">
+<a class="card reveal" href="/packages" style="text-decoration:none"><div class="tag2">Individuals</div><h3>Your daily driver</h3><p class="muted">Three packages, priced by vehicle size and how dirty your car is.</p><b class="price">Full Detail from ${{ packages.full.prices.car }}</b></a>
+<a class="card reveal" href="/dealers" style="text-decoration:none"><div class="tag2">Dealers &amp; brokers</div><h3>Recon, per vehicle</h3><p class="muted">Fast turnaround on lot cars. One itemized invoice, pay online.</p><b class="price">From ${{ dealer_min }} per car</b></a>
+<a class="card reveal" href="/fleet" style="text-decoration:none"><div class="tag2">Turo &amp; rideshare</div><h3>Turnover cleans</h3><p class="muted">Between-trip cleans for hosts and interior resets for drivers.</p><b class="price">Fleet rate for 3+ cars</b></a>
+<a class="card reveal" href="/fleet#plan" style="text-decoration:none"><div class="tag2">Monthly plan</div><h3>Stay clean all month</h3><p class="muted">Two maintenance details a month for one flat price.</p><b class="price">Cancel any time</b></a>
+</div>
+
+<h2 class="reveal" style="margin-top:56px">See the difference</h2>
+<p class="muted reveal">Real jobs, real results. Drag the sliders on the Mercedes, or compare the pairs below.</p>
+<div class="ba-wrap reveal">
+ <div class="ba"><img src="/static/img/e350-front-clean.jpg" alt="Mercedes E350 front after detail"><img class="top" src="/static/img/e350-front-dirty.jpg" alt="Mercedes E350 front before detail"><div class="bar"></div><span class="lbl l1">BEFORE</span><span class="lbl l2">AFTER</span><input type="range" min="0" max="100" value="50" aria-label="Before and after front"></div>
+ <div class="ba"><img src="/static/img/e350-back-clean.jpg" alt="Mercedes E350 rear after detail"><img class="top" src="/static/img/e350-back-dirty.jpg" alt="Mercedes E350 rear before detail"><div class="bar"></div><span class="lbl l1">BEFORE</span><span class="lbl l2">AFTER</span><input type="range" min="0" max="100" value="50" aria-label="Before and after rear"></div>
+</div>
+<div class="pairs reveal">
+ <div class="pair"><div class="imgs"><figure><img loading="lazy" src="/static/img/work/IMG_3529.jpg" alt="SUV cargo area before"><span class="lbl">BEFORE</span></figure><figure class="after"><img loading="lazy" src="/static/img/work/IMG_3534.jpg" alt="SUV cargo area after"><span class="lbl">AFTER</span></figure></div><p>SUV cargo area</p></div>
+ <div class="pair"><div class="imgs"><figure><img loading="lazy" src="/static/img/work/IMG_3682.jpg" alt="Chevy Trax front before"><span class="lbl">BEFORE</span></figure><figure class="after"><img loading="lazy" src="/static/img/work/IMG_3687.jpg" alt="Chevy Trax front after"><span class="lbl">AFTER</span></figure></div><p>Chevy Trax, front</p></div>
+ <div class="pair"><div class="imgs"><figure><img loading="lazy" src="/static/img/work/IMG_3684.jpg" alt="Chevy Trax rear before"><span class="lbl">BEFORE</span></figure><figure class="after"><img loading="lazy" src="/static/img/work/IMG_3686.jpg" alt="Chevy Trax rear after"><span class="lbl">AFTER</span></figure></div><p>Chevy Trax, rear</p></div>
+</div>
+
+<h2 style="margin-top:56px" class="reveal">Simple, honest pricing</h2>
+<div class="card reveal"><p>Every vehicle is different, so every price is too. Choose your <b>vehicle size</b> (car, small SUV, truck or large SUV) and <b>how dirty it is</b>. You see the exact price before you pay.</p><a class="btn" href="/packages">See packages and prices</a></div>
+
+<h2 style="margin-top:56px" class="reveal">How it works</h2>
+<div class="grid steps"><div class="card reveal"><h3>Pick your package</h3><p class="muted">Choose vehicle size, condition and package.</p></div>
+<div class="card reveal"><h3>Pay securely</h3><p class="muted">Card checkout by Stripe. Receipt by email.</p></div>
+<div class="card reveal"><h3>We come to you</h3><p class="muted">We confirm a time and bring our own water and power.</p></div>
+<div class="card reveal"><h3>Enjoy the shine</h3><p class="muted">Back to showroom condition.</p></div></div>
+
+<h2 style="margin-top:56px" class="reveal">Where we work</h2>
+<div class="pills reveal">{% for c in cities %}<a href="/areas/{{ slug(c) }}">{{ c }}</a>{% endfor %}</div>
+<p class="muted reveal">Just outside the list? <a href="{{ biz.sms }}">Text us</a>. Questions? <a href="/faq">Read the FAQ</a>.</p>
+
+<div class="cta reveal"><h2>Ready to transform your vehicle?</h2><a class="btn" data-track="book_tap" href="/book">Book Now</a>
+<p style="margin:22px 0 10px">Follow our work</p><div class="social"><a href="{{ biz.instagram }}" target="_blank" rel="noopener">Instagram</a><a href="{{ biz.facebook }}" target="_blank" rel="noopener">Facebook</a><a href="{{ biz.youtube }}" target="_blank" rel="noopener">YouTube</a></div></div>
+</main>{% endblock %}

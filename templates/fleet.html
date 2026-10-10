@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block title %}Turo, Rideshare &amp; Monthly Plans | Tillis Auto Aesthetics{% endblock %}{% block body %}
+<section class="pagehead"><h1>Turo hosts, rideshare &amp; monthly plans</h1><p>Recurring care for cars that work for a living.</p></section>
+<main>
+<div class="grid">
+<div class="card"><div class="tag2">Turo &amp; rental hosts</div><h3>{{ fleet.turo.name }}</h3><div class="big" style="font-size:2rem;font-weight:800;color:var(--navy)">${{ fleet.turo.price }} <span class="note">per car</span></div>
+<p><b>${{ fleet.turo.fleet }} per car</b> for 3 or more cars.</p><p class="muted">{{ fleet.turo.note }}</p><a class="btn" href="#inquiry">Get a fleet quote</a></div>
+<div class="card"><div class="tag2">Rideshare drivers</div><h3>{{ fleet.rideshare.name }}</h3><div style="font-size:2rem;font-weight:800;color:var(--navy)">${{ fleet.rideshare.price }}</div>
+<p class="muted">{{ fleet.rideshare.note }}</p><a class="btn" href="#inquiry">Book a reset</a></div></div>
+
+<h2 id="plan" style="margin-top:56px">{{ membership.name }}</h2>
+<div class="two"><div class="card"><ul class="muted" style="padding-left:18px">{% for i in membership.includes %}<li>{{ i }}</li>{% endfor %}</ul>
+<div style="overflow-x:auto"><table class="cmp"><tr>{% for v in vehicles.values() %}<th>{{ v }}</th>{% endfor %}</tr><tr>{% for k in vehicles %}<td>${{ membership.prices[k] }}/mo</td>{% endfor %}</tr></table></div>
+<p><a class="btn" data-track="book_tap" href="/book?package=plan">Start my plan</a></p></div>
+<div><h3>Why a plan?</h3><p class="muted">Regular maintenance keeps dirt from building up, protects your paint and interior, and costs less than letting it go and doing a deep clean. Pay monthly, cancel any time.</p></div></div>
+
+<h2 id="inquiry" style="margin-top:56px">Get a quote</h2>
+<div class="card"><form class="stack" method="post" action="{{ cfg.formspree_url }}" data-formspree><input type="hidden" name="kind" value="Turo / rideshare / fleet quote"><input type="hidden" name="_subject" value="New fleet quote request"><input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off"><div class="fmsg msg" style="display:none"></div>
+<div class="fgrid"><div><label>Your name</label><input type="text" name="name" required></div><div><label>Phone</label><input type="tel" name="phone"></div><div><label>Email</label><input type="email" name="email"></div></div>
+<label>How many cars, and what do you need?</label><textarea name="message" rows="4" required></textarea><br><button class="btn">Send</button>
+<p class="note">Or text <a data-track="text_tap" href="{{ biz.sms }}">{{ biz.phone }}</a>.</p></form></div>
+</main>{% endblock %}

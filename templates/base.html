@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Mobile Car Detailing in the South Bay | Tillis Auto Aesthetics{% endblock %}</title>
+<meta name="description" content="{% block desc %}Mobile car detailing in the South Bay: Torrance, Redondo Beach, Manhattan Beach, El Segundo, Hawthorne, Gardena, Inglewood and more. Clear prices by vehicle size. Book online.{% endblock %}">
+<meta property="og:type" content="website"><meta property="og:title" content="{{ self.title() }}"><meta property="og:image" content="{{ site_url }}/static/img/logo.jpg">
+<meta name="twitter:card" content="summary"><meta name="twitter:image" content="{{ site_url }}/static/img/logo.jpg">
+<link rel="icon" href="/static/img/logo.jpg"><link rel="stylesheet" href="/static/style.css">
+<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"AutoDetailing","name":biz.name,"telephone":"+13107010263","email":biz.email,"url":site_url,"image":site_url+"/static/img/logo.jpg","priceRange":"$$","areaServed":cities,"sameAs":[biz.instagram,biz.facebook,biz.youtube]}|tojson }}</script>
+{% if ga_id %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ ga_id }}')</script>{% endif %}
+{% if pixel_id %}<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','{{ pixel_id }}');fbq('track','PageView')</script>{% endif %}
+</head><body>
+<nav><div class="in"><a class="logo" href="/"><img src="/static/img/logo.jpg" alt="Tillis Auto Aesthetics logo"><span>Tillis Auto Aesthetics</span></a>
+<div class="links"><a class="l" href="/packages">Packages</a><a class="l" href="/dealers">Dealers</a><a class="l" href="/fleet">Turo &amp; Rideshare</a><a class="l" href="/faq">FAQ</a><a class="l hide-m" data-track="call_tap" href="{{ biz.tel }}">{{ biz.phone }}</a></div>
+<a class="btn" data-track="book_tap" href="/book" style="white-space:nowrap">Book</a></div></nav>
+{% block body %}{% endblock %}
+<footer class="big"><img src="/static/img/logo.jpg" alt="Tillis Auto Aesthetics"><p><b style="color:#fff">Tillis Auto Aesthetics</b><br>Mobile car detailing in the South Bay</p>
+<p><a data-track="call_tap" href="{{ biz.tel }}">{{ biz.phone }}</a> · <a data-track="text_tap" href="{{ biz.sms }}">Text us</a> · <a href="mailto:{{ biz.email }}">{{ biz.email }}</a></p>
+<p style="font-size:.9rem">Serving {% for c in cities %}<a href="/areas/{{ slug(c) }}">{{ c }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+<div class="social"><a href="{{ biz.instagram }}" target="_blank" rel="noopener">Instagram</a><a href="{{ biz.facebook }}" target="_blank" rel="noopener">Facebook</a><a href="{{ biz.youtube }}" target="_blank" rel="noopener">YouTube</a></div>
+<p style="font-size:.85rem;margin-top:22px">© 2026 Tillis Auto Aesthetics. All rights reserved.</p></footer>
+<div class="callbar"><a class="btn" style="background:var(--navy)" data-track="call_tap" href="{{ biz.tel }}">Call</a><a class="btn" style="background:var(--navy)" data-track="text_tap" href="{{ biz.sms }}">Text</a><a class="btn" data-track="book_tap" href="/book">Book</a></div>
+<script>
+document.addEventListener('click',e=>{const a=e.target.closest('[data-track]');if(!a)return;const n=a.dataset.track;try{window.gtag&&gtag('event',n);window.fbq&&fbq('trackCustom',n)}catch(_){}});
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.ba').forEach(b=>{const r=b.querySelector('input'),t=b.querySelector('.top'),bar=b.querySelector('.bar');const up=()=>{t.style.clipPath=`inset(0 ${100-r.value}% 0 0)`;bar.style.left=r.value+'%'};r.addEventListener('input',up);up()});
+
+document.querySelectorAll('form[data-formspree]').forEach(f=>f.addEventListener('submit',async e=>{e.preventDefault();const m=f.querySelector('.fmsg'),btn=f.querySelector('button');btn.disabled=true;
+try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});if(!r.ok)throw 0;f.reset();m.className='fmsg msg ok';m.textContent='Thanks! We got your message and will reach out soon.';try{window.gtag&&gtag('event','lead_form');window.fbq&&fbq('track','Lead')}catch(_){}}
+catch(_){m.className='fmsg msg bad';m.textContent='Something went wrong. Please call or text {{ biz.phone }}.'}m.style.display='block';btn.disabled=false}));
+</script></body></html>
