@@ -15,7 +15,7 @@ const cors = (origin) => ({
 const json = (obj, status, origin) =>
   new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", ...cors(origin) } });
 
-export function buildSession(b, env) {
+function buildSession(b, env) {
   const P = PRICING;
   const vehicle = String(b.vehicle || ""), cond = String(b.condition || ""), pkg = String(b.package || "");
   if (!P.vehicles[vehicle]) throw new Error("Choose your vehicle size");
