@@ -165,8 +165,13 @@ function buildSession(b, env) {
   }
   const f = new URLSearchParams();
   f.set("mode", mode);
-  f.set("success_url", `${SITE}/thanks/`);
-  f.set("cancel_url", `${SITE}/book/`);
+  if (b.embedded) {
+    f.set("ui_mode", "embedded_page");
+    f.set("return_url", `${SITE}/thanks/?session_id={CHECKOUT_SESSION_ID}`);
+  } else {
+    f.set("success_url", `${SITE}/thanks/`);
+    f.set("cancel_url", `${SITE}/book/`);
+  }
   f.set("phone_number_collection[enabled]", "true");
   f.set("billing_address_collection", "required");
   if (mode === "payment") f.set("invoice_creation[enabled]", "true");
@@ -203,6 +208,6 @@ export default {
     });
     const s = await r.json();
     if (!r.ok) return json({ error: "Could not start checkout", detail: (s.error && s.error.message) || r.status }, 502, origin);
-    return json({ url: s.url }, 200, origin);
+    return json({ url: s.url, clientSecret: s.client_secret, publishableKey: env.STRIPE_PUBLISHABLE_KEY || null }, 200, origin);
   },
 };
