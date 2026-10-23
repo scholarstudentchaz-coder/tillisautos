@@ -1,7 +1,6 @@
 {% extends "base.html" %}{% block title %}Car Detailing Packages &amp; Prices | Tillis Auto Aesthetics{% endblock %}{% block body %}
 <section class="pagehead"><h1>Packages &amp; prices</h1><p>Priced by vehicle size and condition. No surprises.</p></section>
 <main>
-<div class="strip"><img src="/static/img/work/bmw-1m-after.jpg" alt="BMW 1M after detail"><img src="/static/img/work/alpina-after.jpg" alt="Alpina B7 after detail"><img src="/static/img/work/bmw-1m-foam.jpg" alt="BMW 1M foam wash"></div>
 <h2>1. Choose your vehicle</h2>
 <div class="sizes" id="sizes">{% for k,v in vehicles.items() %}<button type="button" data-v="{{ k }}" class="{{ 'on' if loop.first }}">{{ v }}</button>{% endfor %}</div>
 <div class="grid" style="margin-top:20px">{% for id,p in packages.items() %}

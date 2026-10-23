@@ -24,12 +24,12 @@ PACKAGES = {  # individuals
     "full": {
         "name": "Revival", "tag": "Most popular", "popular": True,
         "includes": ["Everything in Renewal", "Clay bar and wax or sealant", "Deep interior clean (carpets, seats, vents, crevices)", "Leather or vinyl conditioned", "Tire shine and trim dressing"],
-        "prices": {"car": 230, "small_suv": 260, "truck": 275, "large_suv": 320}, "time": "about 3 to 4 hrs",
+        "prices": {"car": 250, "small_suv": 280, "truck": 300, "large_suv": 350}, "time": "about 3 to 4 hrs",
     },
     "premium": {
         "name": "Restoration", "tag": "Maximum protection",
         "includes": ["Everything in Revival", "Paint correction (one-step polish)", "Ceramic coating for long-lasting gloss", "Headlight clean-up", "Engine bay cleaned and dressed"],
-        "prices": {"car": 700, "small_suv": 780, "truck": 820, "large_suv": 950}, "time": "1 day",
+        "prices": {"car": 650, "small_suv": 720, "truck": 760, "large_suv": 875}, "time": "1 day",
     },
 }
 
