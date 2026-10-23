@@ -23,19 +23,28 @@ function buildSession(b, env) {
     vehicle, condition: P.conditions[cond] ? cond : "", city: String(b.city || "").slice(0, 60),
     address: String(b.address || "").slice(0, 200), date: String(b.date || "").slice(0, 60), notes: String(b.notes || "").slice(0, 300),
   };
-  const lines = []; // [name, dollars]
   let mode = "payment";
+  let trialDays = 0;
+  const oneTime = []; // charged today
+  const recurring = []; // monthly plan
   if (pkg === "plan") {
+    // Individuals must do a Revival first; the monthly plan starts after it.
+    const rev = P.membership.requires;
+    if (!P.conditions[cond]) throw new Error("Choose how dirty the vehicle is (needed for your Revival)");
     mode = "subscription";
-    lines.push([`${P.membership.name} - ${P.vehicles[vehicle]}`, P.membership.prices[vehicle]]);
+    trialDays = P.membership.trial_days;
+    meta.package = "plan+" + rev;
+    oneTime.push([`${P.packages[rev].name} - ${P.vehicles[vehicle]} (${P.conditions[cond].label.toLowerCase()})`,
+      r5(P.packages[rev].prices[vehicle] * P.conditions[cond].mult)]);
+    recurring.push([`${P.membership.name} - ${P.vehicles[vehicle]} (${P.membership.discount_pct}% recurring rate)`, P.membership.prices[vehicle]]);
   } else {
     if (!P.packages[pkg] || !P.conditions[cond]) throw new Error("Choose a package and how dirty the vehicle is");
     meta.package = pkg;
-    lines.push([`${P.packages[pkg].name} - ${P.vehicles[vehicle]} (${P.conditions[cond].label.toLowerCase()})`,
+    oneTime.push([`${P.packages[pkg].name} - ${P.vehicles[vehicle]} (${P.conditions[cond].label.toLowerCase()})`,
       r5(P.packages[pkg].prices[vehicle] * P.conditions[cond].mult)]);
     for (const a of Array.isArray(b.addons) ? b.addons : []) {
-      if (P.addons[a] && !(pkg === "premium" && P.premium_includes.includes(a)) && !lines.some((l) => l[0] === P.addons[a].name))
-        lines.push([P.addons[a].name, P.addons[a].price]);
+      if (P.addons[a] && !(pkg === "premium" && P.premium_includes.includes(a)) && !oneTime.some((l) => l[0] === P.addons[a].name))
+        oneTime.push([P.addons[a].name, P.addons[a].price]);
     }
   }
   const f = new URLSearchParams();
@@ -51,15 +60,19 @@ function buildSession(b, env) {
   f.set("billing_address_collection", "required");
   if (mode === "payment") f.set("invoice_creation[enabled]", "true");
   if (env.STRIPE_TAX_ENABLED === "true") f.set("automatic_tax[enabled]", "true");
-  lines.forEach(([name, dollars], i) => {
-    const p = `line_items[${i}]`;
+  let i = 0;
+  const addLine = (name, dollars, isRecurring) => {
+    const p = `line_items[${i++}]`;
     f.set(`${p}[quantity]`, "1");
     f.set(`${p}[price_data][currency]`, "usd");
     f.set(`${p}[price_data][unit_amount]`, String(Math.round(dollars * 100)));
     f.set(`${p}[price_data][product_data][name]`, name);
     f.set(`${p}[price_data][product_data][tax_code]`, "txcd_20030000");
-    if (mode === "subscription") f.set(`${p}[price_data][recurring][interval]`, "month");
-  });
+    if (isRecurring) f.set(`${p}[price_data][recurring][interval]`, "month");
+  };
+  oneTime.forEach(([n, d]) => addLine(n, d, false));
+  recurring.forEach(([n, d]) => addLine(n, d, true));
+  if (trialDays) f.set("subscription_data[trial_period_days]", String(trialDays));
   for (const [k, v] of Object.entries(meta)) {
     f.set(`metadata[${k}]`, v);
     if (mode === "subscription") f.set(`subscription_data[metadata][${k}]`, v);

@@ -14,20 +14,21 @@ CONDITIONS = {
     "heavy": {"label": "Very dirty", "mult": 1.4, "desc": "Heavy mud, deep stains, lots of pet hair or sand, neglected."},
 }
 
+# Package ids stay the same (express / full / premium); only the display names changed.
 PACKAGES = {  # individuals
     "express": {
-        "name": "Express Refresh", "tag": "Quick upkeep",
+        "name": "Renewal", "tag": "Quick upkeep",
         "includes": ["Hand wash and dry", "Wheels and tires cleaned", "Interior vacuum", "Dash, doors and console wipe-down", "Windows inside and out"],
         "prices": {"car": 120, "small_suv": 135, "truck": 150, "large_suv": 175}, "time": "about 1.5 hrs",
     },
     "full": {
-        "name": "Full Detail", "tag": "Most popular", "popular": True,
-        "includes": ["Everything in Express Refresh", "Clay bar and wax or sealant", "Deep interior clean (carpets, seats, vents, crevices)", "Leather or vinyl conditioned", "Tire shine and trim dressing"],
-        "prices": {"car": 250, "small_suv": 280, "truck": 300, "large_suv": 350}, "time": "about 3 to 4 hrs",
+        "name": "Revival", "tag": "Most popular", "popular": True,
+        "includes": ["Everything in Renewal", "Clay bar and wax or sealant", "Deep interior clean (carpets, seats, vents, crevices)", "Leather or vinyl conditioned", "Tire shine and trim dressing"],
+        "prices": {"car": 230, "small_suv": 260, "truck": 275, "large_suv": 320}, "time": "about 3 to 4 hrs",
     },
     "premium": {
-        "name": "Showroom Premium", "tag": "Maximum protection",
-        "includes": ["Everything in Full Detail", "Paint correction (one-step polish)", "Ceramic coating for long-lasting gloss", "Headlight clean-up", "Engine bay cleaned and dressed"],
+        "name": "Restoration", "tag": "Maximum protection",
+        "includes": ["Everything in Revival", "Paint correction (one-step polish)", "Ceramic coating for long-lasting gloss", "Headlight clean-up", "Engine bay cleaned and dressed"],
         "prices": {"car": 700, "small_suv": 780, "truck": 820, "large_suv": 950}, "time": "1 day",
     },
 }
@@ -36,10 +37,8 @@ ADDONS = {
     "headlight": {"name": "Headlight restoration", "price": 90},
     "engine": {"name": "Engine bay cleaning", "price": 75},
     "pethair": {"name": "Heavy pet hair removal", "price": 60},
-    "scratch": {"name": "Scratch removal (per area)", "price": 150},
-    "ceramic": {"name": "Ceramic coating", "price": 450},
 }
-PREMIUM_INCLUDES = {"headlight", "engine", "scratch", "ceramic"}  # not sold again with Premium
+PREMIUM_INCLUDES = {"headlight", "engine"}  # already part of Restoration, not sold again with it
 
 DEALER_PACKAGES = {  # per vehicle, invoiced
     "lot": {"name": "Lot Ready", "tag": "Fast turnaround",
@@ -53,21 +52,33 @@ DEALER_PACKAGES = {  # per vehicle, invoiced
                  "prices": {"car": 210, "small_suv": 230, "truck": 245, "large_suv": 270}},
 }
 
-MEMBERSHIP = {  # monthly subscription, 2 maintenance washes per month
+# Monthly plan for INDIVIDUALS only (Turo hosts get fleet pricing instead). 5% below the regular rate.
+_PLAN_REGULAR = {"car": 119, "small_suv": 129, "truck": 139, "large_suv": 159}
+PLAN_DISCOUNT_PCT = 5
+PLAN_TRIAL_DAYS = 30  # first monthly charge happens this many days after the required Revival
+MEMBERSHIP = {
     "name": "Monthly Maintenance Plan",
     "includes": ["2 maintenance details per month", "Exterior hand wash, wheels, windows", "Interior vacuum and wipe-down", "Priority scheduling", "Cancel any time"],
-    "prices": {"car": 119, "small_suv": 129, "truck": 139, "large_suv": 159},
+    "regular_prices": _PLAN_REGULAR,
+    "prices": {k: int(round(v * (100 - PLAN_DISCOUNT_PCT) / 100.0)) for k, v in _PLAN_REGULAR.items()},
+    "discount_pct": PLAN_DISCOUNT_PCT,
+    "requires": "full",  # the Revival
+    "trial_days": PLAN_TRIAL_DAYS,
 }
 
 FLEET = {
-    "turo": {"name": "Turo host turnover clean", "price": 70, "fleet": 60,
-             "note": "Between-trip interior reset and exterior rinse. Fleet rate for 3+ cars."},
+    "turo": {
+        "renewal": {"name": "Renewal", "price": 90, "fleet": 80, "fleet_min": 5,
+                    "note": "Between-trip interior reset and exterior wash, one flat price per car. Fleet rate for 5 or more cars."},
+        "revival": {"name": "Revival", "note": "A deep reset for cars that need more than a quick turnaround. Priced by vehicle size, the same as our Revival package."},
+    },
     "rideshare": {"name": "Rideshare interior reset", "price": 75,
                   "note": "Deep interior clean so your ratings stay high. Add the Monthly Maintenance Plan to keep it that way."},
 }
 
 CITIES = ["Torrance", "Redondo Beach", "Hermosa Beach", "Manhattan Beach", "El Segundo",
-          "Hawthorne", "Lawndale", "Gardena", "Inglewood", "Lennox", "Carson"]
+          "Hawthorne", "Lawndale", "Gardena", "Inglewood", "Lennox", "Carson",
+          "Los Angeles", "Westchester", "Palos Verdes"]
 
 
 def r5(x):

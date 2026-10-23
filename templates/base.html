@@ -3,16 +3,16 @@
 <meta name="description" content="{% block desc %}Mobile car detailing in the South Bay: Torrance, Redondo Beach, Manhattan Beach, El Segundo, Hawthorne, Gardena, Inglewood and more. Clear prices by vehicle size. Book online.{% endblock %}">
 <meta property="og:type" content="website"><meta property="og:title" content="{{ self.title() }}"><meta property="og:image" content="{{ site_url }}/static/img/logo.jpg">
 <meta name="twitter:card" content="summary"><meta name="twitter:image" content="{{ site_url }}/static/img/logo.jpg">
-<link rel="icon" href="/static/img/logo.jpg"><link rel="stylesheet" href="/static/style.css">
+<link rel="icon" type="image/png" href="/static/img/favicon.png"><link rel="stylesheet" href="/static/style.css">
 <script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"AutoDetailing","name":biz.name,"telephone":"+13107010263","email":biz.email,"url":site_url,"image":site_url+"/static/img/logo.jpg","priceRange":"$$","areaServed":cities,"sameAs":[biz.instagram,biz.facebook,biz.youtube]}|tojson }}</script>
 {% if ga_id %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ ga_id }}')</script>{% endif %}
 {% if pixel_id %}<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','{{ pixel_id }}');fbq('track','PageView')</script>{% endif %}
 </head><body>
-<nav><div class="in"><a class="logo" href="/"><img src="/static/img/logo.jpg" alt="Tillis Auto Aesthetics logo"><span>Tillis Auto Aesthetics</span></a>
+<nav><div class="in"><a class="logo" href="/"><img src="/static/img/logo-circle.png" alt="Tillis Auto Aesthetics logo"><span>Tillis Auto Aesthetics</span></a>
 <div class="links"><a class="l" href="/packages">Packages</a><a class="l" href="/dealers">Dealers</a><a class="l" href="/fleet">Turo &amp; Rideshare</a><a class="l" href="/faq">FAQ</a><a class="l hide-m" data-track="call_tap" href="{{ biz.tel }}">{{ biz.phone }}</a></div>
 <a class="btn" data-track="book_tap" href="/book" style="white-space:nowrap">Book</a></div></nav>
 {% block body %}{% endblock %}
-<footer class="big"><img src="/static/img/logo.jpg" alt="Tillis Auto Aesthetics"><p><b style="color:#fff">Tillis Auto Aesthetics</b><br>Mobile car detailing in the South Bay</p>
+<footer class="big"><img src="/static/img/logo-circle.png" alt="Tillis Auto Aesthetics"><p><b style="color:#fff">Tillis Auto Aesthetics</b><br>Mobile car detailing in Los Angeles and the South Bay</p>
 <p><a data-track="call_tap" href="{{ biz.tel }}">{{ biz.phone }}</a> · <a data-track="text_tap" href="{{ biz.sms }}">Text us</a> · <a href="mailto:{{ biz.email }}">{{ biz.email }}</a></p>
 <p style="font-size:.9rem">Serving {% for c in cities %}<a href="/areas/{{ slug(c) }}">{{ c }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
 <div class="social"><a href="{{ biz.instagram }}" target="_blank" rel="noopener">Instagram</a><a href="{{ biz.facebook }}" target="_blank" rel="noopener">Facebook</a><a href="{{ biz.youtube }}" target="_blank" rel="noopener">YouTube</a></div>

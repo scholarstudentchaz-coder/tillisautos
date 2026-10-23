@@ -1,41 +1,50 @@
 {% extends "base.html" %}{% block title %}Book Mobile Detailing Online | Tillis Auto Aesthetics{% endblock %}{% block body %}
 <section class="pagehead"><h1>Book &amp; pay online</h1><p>See your exact price before you pay.</p></section>
-<main><div id="pay" style="display:none;max-width:760px;margin:auto"><a href="#" id="back" style="font-weight:600">&larr; Change my order</a><h2 style="margin-top:12px">Secure payment</h2><div id="embedded"></div></div><div id="formwrap"><div id="err" class="msg bad" style="display:none"></div>
+<main><div id="pay" style="display:none;max-width:760px;margin:auto"><a href="#" id="back" style="font-weight:600">&larr; Change my order</a><h2 style="margin-top:12px">Secure payment</h2><div id="embedded"></div></div><div id="formwrap">
+<div id="err" class="msg bad" style="display:none"></div>
 <form id="f" onsubmit="return false"><div class="cols"><div>
 <h2>1. Your vehicle</h2>
 {% for k,v in data.vehicles.items() %}<label class="opt"><input type="radio" name="vehicle" value="{{ k }}" required><span>{{ v }}</span></label>{% endfor %}
 <h2 style="margin-top:32px">2. How dirty is it?</h2>
 {% for k,c in data.conditions.items() %}<label class="opt"><input type="radio" name="condition" value="{{ k }}" {{ 'checked' if k=='light' }}><span><b>{{ c.label }}</b><br><span class="muted">{{ c.desc }}</span></span><span class="p">{% if c.mult==1 %}base{% else %}+{{ ((c.mult-1)*100)|round|int }}%{% endif %}</span></label>{% endfor %}
+<p class="note">Please choose honestly. If your vehicle is dirtier than selected, we will show you and offer to adjust to the right level before we start.</p>
 <h2 style="margin-top:32px">3. Package</h2>
 {% for k,p in data.packages.items() %}<label class="opt"><input type="radio" name="package" value="{{ k }}"><span><b>{{ p.name }}</b> <span class="muted">· {{ p.time }}</span><br><span class="muted">{{ p.includes|join(' · ') }}</span></span><span class="p" data-p="{{ k }}"></span></label>{% endfor %}
-<label class="opt"><input type="radio" name="package" value="plan"><span><b>{{ data.membership.name }}</b> <span class="muted">· monthly subscription</span><br><span class="muted">{{ data.membership.includes|join(' · ') }}</span></span><span class="p" data-p="plan"></span></label>
+<label class="opt"><input type="radio" name="package" value="plan"><span><b>{{ data.membership.name }}</b> <span class="muted">· {{ data.membership.discount_pct }}% off, monthly</span><br><span class="muted">{{ data.membership.includes|join(' · ') }}</span><br><b style="color:var(--navy)">Starts with a Revival.</b> <span class="muted">You pay for your Revival today, and your monthly plan begins {{ data.membership.trial_days }} days later.</span></span><span class="p" data-p="plan"></span></label>
 <div id="addons"><h2 style="margin-top:32px">4. Add-ons (optional)</h2>
 {% for k,a in data.addons.items() %}<label class="opt" data-a="{{ k }}"><input type="checkbox" name="addon" value="{{ k }}"><span>{{ a.name }}</span><span class="p">${{ a.price }}</span></label>{% endfor %}</div>
 <h2 style="margin-top:32px">5. Where and when</h2>
 <div class="fgrid"><div><label>City</label><select name="city" required><option value="">Choose...</option>{% for c in cities %}<option>{{ c }}</option>{% endfor %}<option>Other (we will confirm)</option></select></div>
-<div><label>Street address</label><input type="text" name="address" required></div><div><label>Preferred date or time</label><input type="text" name="date" placeholder="e.g. Saturday morning"></div></div>
+<div class="addr-wrap"><label>Street address</label><input type="text" name="address" id="address" required autocomplete="street-address" placeholder="Start typing your address"><ul class="addr-list" id="addrList"></ul></div><div><label>Preferred date or time</label><input type="text" name="date" placeholder="e.g. Saturday morning"></div></div>
 <label style="display:block;margin:14px 0 4px;font-weight:600">Vehicle year/make/model and notes</label><textarea name="notes" rows="3" placeholder="2019 Honda CR-V, gate code, pet hair, etc."></textarea>
+<label class="ack"><input type="checkbox" name="ack" required><span>I chose my vehicle size and how dirty it is as accurately as I could. If it is dirtier than selected, I understand the price may be adjusted to the right level, and I can approve that or reschedule before work begins.</span></label>
 </div>
-<aside><div class="summary"><h3 style="margin-top:0">Your price</h3><div id="lines" class="muted">Choose a vehicle and package.</div><div class="row tot"><span>Total</span><span id="tot">$0</span></div>
-<p class="note" id="plannote" style="display:none">Billed monthly until you cancel.</p><p class="note">Tax (if any) is added at checkout.</p>
+<aside><div class="summary"><h3 style="margin-top:0">Your price</h3><div id="lines" class="muted">Choose a vehicle and package.</div><div class="row tot"><span id="totLabel">Total</span><span id="tot">$0</span></div>
+<p class="note" id="plannote" style="display:none"></p><p class="note">Tax (if any) is added at checkout.</p>
 <button class="btn" style="width:100%" id="go" disabled data-track="checkout_start" type="button">Continue to secure payment</button>
 <p class="note" style="margin-top:10px">Questions? <a data-track="text_tap" href="{{ biz.sms }}">Text {{ biz.phone }}</a> to book instead.</p></div></aside></div></form></div></main>
 <script>
 const D={{ data|tojson }},f=document.getElementById('f');
 const r5=x=>Math.round(x/5)*5,$=n=>'$'+n.toLocaleString();
 const val=n=>(f.querySelector(`[name=${n}]:checked`)||{}).value;
-function calc(){const v=val('vehicle'),c=val('condition'),p=val('package');let lines=[],tot=0;
+const revivalPrice=(v,c)=>r5(D.packages[D.membership.requires].prices[v]*D.conditions[c].mult);
+function calc(){const v=val('vehicle'),c=val('condition'),p=val('package');let lines=[],tot=0;const note=document.getElementById('plannote');note.style.display='none';
  document.querySelectorAll('[data-p]').forEach(e=>{const k=e.dataset.p;e.textContent=v?(k==='plan'?$(D.membership.prices[v])+'/mo':$(r5(D.packages[k].prices[v]*D.conditions[c].mult))):'pick vehicle'});
  document.querySelectorAll('[data-a]').forEach(l=>{const off=p==='premium'&&D.premium_includes.includes(l.dataset.a);l.classList.toggle('off',off||p==='plan');if(off||p==='plan')l.querySelector('input').checked=false});
- if(v&&p){if(p==='plan'){lines.push([D.membership.name,D.membership.prices[v]])}else{lines.push([D.packages[p].name,r5(D.packages[p].prices[v]*D.conditions[c].mult)]);
+ let label='Total';
+ if(v&&p){if(p==='plan'){const rv=revivalPrice(v,c);lines.push([D.packages[D.membership.requires].name+' (required first)',rv]);tot=rv;label='Due today';
+   const d=new Date(Date.now()+D.membership.trial_days*864e5).toLocaleDateString(undefined,{month:'long',day:'numeric'});
+   note.innerHTML=`Then <b>${$(D.membership.prices[v])}/month</b> (${D.membership.discount_pct}% off) starting about ${d}, until you cancel.`;note.style.display='block'}
+  else{lines.push([D.packages[p].name,r5(D.packages[p].prices[v]*D.conditions[c].mult)]);
   f.querySelectorAll('[name=addon]:checked').forEach(a=>lines.push([D.addons[a.value].name,D.addons[a.value].price]))}}
- lines.forEach(l=>tot+=l[1]);document.getElementById('lines').innerHTML=lines.length?lines.map(l=>`<div class="row"><span>${l[0]}</span><span>${$(l[1])}</span></div>`).join(''):'Choose a vehicle and package.';
- document.getElementById('tot').textContent=$(tot)+(p==='plan'?'/mo':'');document.getElementById('plannote').style.display=p==='plan'?'':'none';document.getElementById('go').disabled=!(v&&p)}
+ if(p!=='plan')lines.forEach(l=>tot+=l[1]);
+ document.getElementById('lines').innerHTML=lines.length?lines.map(l=>`<div class="row"><span>${l[0]}</span><span>${$(l[1])}</span></div>`).join(''):'Choose a vehicle and package.';
+ document.getElementById('totLabel').textContent=label;document.getElementById('tot').textContent=$(tot);document.getElementById('go').disabled=!(v&&p)}
 f.addEventListener('change',calc);
 const CHECKOUT={{ cfg.checkout_url|tojson }};
 document.getElementById('go').onclick=async()=>{const err=document.getElementById('err'),go=document.getElementById('go');err.style.display='none';
  if(!f.reportValidity())return;
- if(!CHECKOUT){err.textContent='Online booking is not available yet. Please call or text {{ biz.phone }} to book.';err.style.display='block';return}
+ if(!CHECKOUT){err.textContent='Online booking is not available yet. Please call or text {{ biz.phone }} to book.';err.style.display='block';window.scrollTo(0,0);return}
  go.disabled=true;go.textContent='Opening secure checkout...';
  const body={embedded:true,vehicle:val('vehicle'),condition:val('condition'),package:val('package'),addons:[...f.querySelectorAll('[name=addon]:checked')].map(a=>a.value),
   city:f.city.value,address:f.address.value,date:f.date.value,notes:f.notes.value};
@@ -43,9 +52,8 @@ document.getElementById('go').onclick=async()=>{const err=document.getElementByI
   let ok=false;try{ok=await embed(j)}catch(_){ok=false}
   if(!ok){body.embedded=false;const r2=await fetch(CHECKOUT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j2=await r2.json();if(!j2.url)throw new Error('failed');location.href=j2.url}
   else{go.disabled=false;go.textContent='Continue to secure payment'}}
- catch(e){err.textContent='Sorry, checkout could not open ('+(e.message||'error')+'). Please call or text {{ biz.phone }} to book.';err.style.display='block';go.disabled=false;go.textContent='Continue to secure payment'}};
+ catch(e){err.textContent='Sorry, checkout could not open ('+(e.message||'error')+'). Please call or text {{ biz.phone }} to book.';err.style.display='block';window.scrollTo(0,0);go.disabled=false;go.textContent='Continue to secure payment'}};
 const q=new URLSearchParams(location.search).get('package');if(q){const r=f.querySelector(`[name=package][value=${q}]`);if(r)r.checked=true}calc();
-
 let checkoutObj=null;
 async function embed(j){if(!j.clientSecret)return false;const pk=j.publishableKey||{{ (cfg.stripe_publishable_key or '')|tojson }};if(!pk||!window.Stripe)return false;
  const stripe=Stripe(pk);const make=stripe.createEmbeddedCheckoutPage||stripe.initEmbeddedCheckout;if(!make)return false;
@@ -53,4 +61,17 @@ async function embed(j){if(!j.clientSecret)return false;const pk=j.publishableKe
  checkoutObj=await make.call(stripe,{clientSecret:j.clientSecret});checkoutObj.mount('#embedded');
  document.getElementById('formwrap').style.display='none';document.getElementById('pay').style.display='block';window.scrollTo(0,0);return true}
 document.getElementById('back').onclick=e=>{e.preventDefault();try{checkoutObj&&checkoutObj.destroy()}catch(_){}checkoutObj=null;document.getElementById('embedded').innerHTML='';document.getElementById('pay').style.display='none';document.getElementById('formwrap').style.display='';calc()};
+
+/* Google address suggestions (turns on when a Google Maps key is set in site_config.json) */
+(async function(){const KEY={{ (cfg.google_maps_key or '')|tojson }};if(!KEY)return;
+ try{await new Promise((res,rej)=>{window.__gm=res;const s=document.createElement('script');s.src='https://maps.googleapis.com/maps/api/js?key='+encodeURIComponent(KEY)+'&loading=async&callback=__gm&v=weekly';s.onerror=rej;document.head.appendChild(s)});
+  const {AutocompleteSuggestion,AutocompleteSessionToken}=await google.maps.importLibrary('places');
+  const input=document.getElementById('address'),list=document.getElementById('addrList');let token=new AutocompleteSessionToken(),timer=null,items=[];
+  const hide=()=>{list.style.display='none';list.innerHTML=''};
+  input.addEventListener('input',()=>{clearTimeout(timer);const t=input.value.trim();if(t.length<3){hide();return}
+   timer=setTimeout(async()=>{try{const {suggestions}=await AutocompleteSuggestion.fetchAutocompleteSuggestions({input:t,sessionToken:token,includedRegionCodes:['us'],locationBias:{center:{lat:33.86,lng:-118.35},radius:50000}});
+    items=suggestions.map(s=>s.placePrediction.text.text);list.innerHTML=items.map((x,i)=>`<li data-i="${i}">${x.replace(/</g,'&lt;')}</li>`).join('');list.style.display=items.length?'block':'none'}catch(_){hide()}},220)});
+  list.addEventListener('mousedown',e=>{const li=e.target.closest('li');if(!li)return;e.preventDefault();input.value=items[+li.dataset.i];hide();token=new AutocompleteSessionToken()});
+  input.addEventListener('blur',()=>setTimeout(hide,150));
+ }catch(_){/* no suggestions: the field still works as a normal text box */}})();
 </script><script async src="https://js.stripe.com/v3/"></script>{% endblock %}
