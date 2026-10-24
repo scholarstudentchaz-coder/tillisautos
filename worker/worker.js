@@ -74,10 +74,10 @@ const PRICING = {
     "Engine bay cleaned and dressed"
    ],
    "prices": {
-    "car": 650,
-    "small_suv": 720,
-    "truck": 760,
-    "large_suv": 875
+    "car": 550,
+    "small_suv": 620,
+    "truck": 660,
+    "large_suv": 760
    },
    "time": "1 day"
   }

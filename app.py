@@ -64,7 +64,7 @@ def packages():
 def dealers():
     exts = ("jpg", "jpeg", "png", "webp")
     found = sorted(f"img/dealers/{os.path.basename(f)}" for e in exts for f in glob.glob(os.path.join(HERE, "static/img/dealers", f"*.{e}")))
-    fallback = ["img/work/bmw-1m-after.jpg", "img/work/alpina-after.jpg", "img/work/bmw-1m-foam.jpg", "img/work/alpina-foam.jpg", "img/work/bmw-1m-before.jpg", "img/work/alpina-before.jpg"]
+    fallback = ["img/work/tahoe-after.jpg", "img/work/trax-after.jpg", "img/hero-detailing.jpg"]
     return render_template("dealers.html", dealer_packages=P.DEALER_PACKAGES, gallery=found or fallback, sent=request.args.get("sent"), err=request.args.get("err"))
 
 
