@@ -2,10 +2,10 @@
 {% block desc %}Recon detailing for South Bay used car dealers and brokers. Fast turnaround, per-vehicle pricing, one itemized invoice you pay online.{% endblock %}{% block body %}
 <section class="pagehead"><h1>Dealers &amp; brokers</h1><p>Lot-ready cars, faster. Priced per vehicle. One invoice.</p></section>
 <main>
-<div class="two"><div><h2>Move inventory faster</h2><p>A clean car sells faster and for more. We come to your lot, detail each vehicle, and send one itemized invoice by email. You pay it online. No chasing, no back and forth.</p>
+<div><div><h2>Move inventory faster</h2><p>A clean car sells faster and for more. We come to your lot, detail each vehicle, and send one itemized invoice by email. You pay it online. No chasing, no back and forth.</p>
 <div class="pills"><span style="background:#eaf0ff;border-radius:99px;padding:6px 14px;font-weight:600">On-site at your lot</span><span style="background:#eaf0ff;border-radius:99px;padding:6px 14px;font-weight:600">Per-vehicle pricing</span><span style="background:#eaf0ff;border-radius:99px;padding:6px 14px;font-weight:600">Photos on every job</span></div>
 <p style="margin-top:20px"><a class="btn" href="#inquiry">Get a dealer quote</a> <a class="btn ghost" style="background:var(--navy)" data-track="call_tap" href="{{ biz.tel }}">Call {{ biz.phone }}</a></p></div>
-<img src="/static/img/work/tahoe-after.jpg" alt="Chevy Tahoe after detail" style="width:100%;border-radius:14px;max-height:380px;object-fit:cover;object-position:center 60%"></div>
+</div>
 
 <h2 style="margin-top:56px">Dealer packages (per vehicle)</h2>
 <div class="grid">{% for id,p in dealer_packages.items() %}
@@ -20,9 +20,6 @@
 <div class="card"><h3>We detail on site</h3><p class="muted">Our detailers bring water, power and products.</p></div>
 <div class="card"><h3>Photos sent</h3><p class="muted">Before and after photos for your records and listings.</p></div>
 <div class="card"><h3>One invoice</h3><p class="muted">Itemized by vehicle, emailed, payable online. Standard terms: 14 days.</p></div></div>
-
-<h2 style="margin-top:56px">The finish your customers see</h2>
-<div class="mosaic">{% for g in gallery %}<img loading="lazy" src="{{ url_for('static', filename=g) }}" alt="Detailed vehicle">{% endfor %}</div>
 
 <h2 id="inquiry" style="margin-top:56px">Request a dealer quote</h2>
 <div class="card"><form class="stack" method="post" action="{{ cfg.formspree_url }}" data-formspree><input type="hidden" name="kind" value="Dealer / broker quote"><input type="hidden" name="_subject" value="New dealer quote request"><input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off"><div class="fmsg msg" style="display:none"></div>
