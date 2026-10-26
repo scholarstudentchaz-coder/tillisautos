@@ -127,7 +127,7 @@ const PRICING = {
  }
 };
 const SITE = "https://tillis.autos";
-const ALLOWED = [SITE, "https://www.tillis.autos"];
+const ALLOWED = ["https://tillis.autos", "https://www.tillis.autos"];
 
 const r5 = (x) => Math.round(x / 5) * 5;
 const cors = (origin) => ({
