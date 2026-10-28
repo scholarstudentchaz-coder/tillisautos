@@ -62,7 +62,7 @@ def packages():
 
 @app.route("/dealers")
 def dealers():
-    return render_template("dealers.html", dealer_packages=P.DEALER_PACKAGES)
+    return render_template("dealers.html", dealer_packages=P.DEALER_PACKAGES, maintenance=P.DEALER_MAINTENANCE)
 
 
 @app.route("/fleet")

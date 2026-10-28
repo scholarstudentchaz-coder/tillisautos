@@ -48,9 +48,16 @@ DEALER_PACKAGES = {  # per vehicle, invoiced
               "includes": ["Everything in Lot Ready", "Deep interior clean", "Seats and carpets shampooed as needed", "Clay and wax", "Tire shine and trim dressing"],
               "prices": {"car": 140, "small_suv": 155, "truck": 165, "large_suv": 185}},
     "showcase": {"name": "Showcase", "tag": "Hero cars",
-                 "includes": ["Everything in Front Line", "Light machine polish", "Headlight clean-up", "Engine bay detail", "Photo-ready finish"],
+                 "includes": ["Everything in Front Line", "Headlight clean-up", "Engine bay detail", "Photo-ready finish"],
                  "prices": {"car": 210, "small_suv": 230, "truck": 245, "large_suv": 270}},
+    "perfected": {"name": "Perfected", "tag": "Best possible finish",
+                  "includes": ["Everything in Showcase", "Light machine polish"],
+                  "prices": {"car": 300, "small_suv": 330, "truck": 360, "large_suv": 400}},
 }
+
+# Recurring maintenance for dealer cars we have already detailed.
+DEALER_MAINTENANCE = {"price": 40, "visits_per_week": 2,
+                      "note": "For cars we have already detailed, so they stay front-line ready between sales."}
 
 # Monthly plan for INDIVIDUALS only (Turo hosts get fleet pricing instead). 5% below the regular rate.
 _PLAN_REGULAR = {"car": 119, "small_suv": 129, "truck": 139, "large_suv": 159}

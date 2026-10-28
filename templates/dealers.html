@@ -15,6 +15,10 @@
 {% for p in dealer_packages.values() %}<tr><td>{{ p.name }}</td>{% for k in vehicles %}<td>${{ p.prices[k] }}</td>{% endfor %}</tr>{% endfor %}</table></div>
 <p class="note">Volume pricing for 10+ vehicles a month. Ask for a recurring rate.</p>
 
+<h2 style="margin-top:48px">Maintenance for cars we have already detailed</h2>
+<div class="card"><div class="tag2">Twice a week</div><h3>Inside and out, ${{ maintenance.price }} per car</h3>
+<p class="muted">{{ maintenance.note }} We visit {{ maintenance.visits_per_week }} times a week and refresh each car inside and out for <b>${{ maintenance.price }} per car</b>.</p></div>
+
 <h2 style="margin-top:56px">How dealer billing works</h2>
 <div class="grid steps"><div class="card"><h3>Tell us the cars</h3><p class="muted">Send year, make and model, or let us walk the lot.</p></div>
 <div class="card"><h3>We detail on site</h3><p class="muted">Our detailers bring water, power and products.</p></div>

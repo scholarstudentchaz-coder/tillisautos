@@ -44,6 +44,7 @@ FAQ = [
  ("Dealers, brokers & fleets", [
   ("Do you work with used car dealers?", "Yes. We do recon details per vehicle for dealers and brokers, with fast turnaround and a clear itemized invoice. See our Dealers page."),
   ("How do dealers pay?", "You get an itemized invoice by email with a link to pay online. Standard terms are 14 days."),
+  ("Do you offer recurring maintenance for dealer cars?", "Yes. For cars we have already detailed, maintenance is $40 per car, inside and out, twice a week."),
   ("Do you offer volume pricing?", "Yes. If you have 10 or more cars a month, contact us for a recurring rate."),
   ("Do you clean Turo and rental cars?", "Yes. Our Renewal between-trip clean is $90 per car, or $80 per car for 5 or more cars. Our Revival is available for a deeper reset. See our Turo and rideshare page."),
   ("Do you offer a monthly plan?", "Yes: two maintenance details a month for a flat monthly price, priced by vehicle size, with 5% off for individuals. Cancel any time."),
