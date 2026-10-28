@@ -42,10 +42,10 @@ PREMIUM_INCLUDES = {"headlight", "engine"}  # already part of Restoration, not s
 
 DEALER_PACKAGES = {  # per vehicle, invoiced
     "lot": {"name": "Lot Ready", "tag": "Fast turnaround",
-            "includes": ["Exterior wash and dry", "Wheels and tires", "Interior vacuum", "Windows", "Quick wipe-down"],
+            "includes": ["Exterior wash and dry", "Wheels and tires", "Tire shine", "Interior vacuum", "Windows", "Quick wipe-down"],
             "prices": {"car": 100, "small_suv": 110, "truck": 120, "large_suv": 135}},
     "front": {"name": "Front Line", "tag": "Best for retail", "popular": True,
-              "includes": ["Everything in Lot Ready", "Deep interior clean", "Seats and carpets shampooed as needed", "Clay and wax", "Tire shine and trim dressing"],
+              "includes": ["Everything in Lot Ready", "Deep interior clean", "Seats and carpets shampooed as needed", "Ceramic wax", "Trim dressing"],
               "prices": {"car": 140, "small_suv": 155, "truck": 165, "large_suv": 185}},
     "showcase": {"name": "Showcase", "tag": "Hero cars",
                  "includes": ["Everything in Front Line", "Headlight clean-up", "Engine bay detail", "Photo-ready finish"],
