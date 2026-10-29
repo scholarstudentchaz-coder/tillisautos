@@ -139,7 +139,24 @@ const cors = (origin) => ({
 const json = (obj, status, origin) =>
   new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", ...cors(origin) } });
 
-function buildSession(b, env) {
+// --- 70/30 split (Stripe Connect) -------------------------------------------------
+// Cloudflare text variable DETAILERS_JSON maps a city to a detailer's connected account, for example
+//   {"Torrance":"acct_123","Redondo Beach":"acct_123","Gardena":"acct_456","default":"acct_123"}
+// If a city has no detailer (and there is no "default"), the booking is NOT split: you receive all of it.
+// Cloudflare text variable DETAILER_PERCENT (default 70) is the detailer's share.
+function detailerFor(city, env) {
+  try {
+    const map = JSON.parse(env.DETAILERS_JSON || "{}");
+    const id = map[city] || map["default"];
+    return typeof id === "string" && id.startsWith("acct_") ? id : null;
+  } catch { return null; }
+}
+const detailerPercent = (env) => {
+  const n = Number(env.DETAILER_PERCENT);
+  return n > 0 && n < 100 ? n : 70;
+};
+
+function buildSession(b, env, split = true) {
   const P = PRICING;
   const vehicle = String(b.vehicle || ""), cond = String(b.condition || ""), pkg = String(b.package || "");
   if (!P.vehicles[vehicle]) throw new Error("Choose your vehicle size");
@@ -197,6 +214,22 @@ function buildSession(b, env) {
   oneTime.forEach(([n, d]) => addLine(n, d, false));
   recurring.forEach(([n, d]) => addLine(n, d, true));
   if (trialDays) f.set("subscription_data[trial_period_days]", String(trialDays));
+  // Split the payment with the detailer for this city (Stripe Connect destination charge)
+  const wanted = detailerFor(meta.city, env);
+  const detailer = split ? wanted : null;
+  if (!split && wanted) meta.split_skipped = "detailer account not ready, booked without split";
+  if (detailer) {
+    const pct = detailerPercent(env);
+    meta.detailer = detailer;
+    if (mode === "subscription") {
+      f.set("subscription_data[transfer_data][destination]", detailer);
+      f.set("subscription_data[transfer_data][amount_percent]", String(pct));
+    } else {
+      const subtotalCents = oneTime.reduce((t, [, d]) => t + Math.round(d * 100), 0);
+      f.set("payment_intent_data[transfer_data][destination]", detailer);
+      f.set("payment_intent_data[transfer_data][amount]", String(Math.round((subtotalCents * pct) / 100)));
+    }
+  }
   for (const [k, v] of Object.entries(meta)) {
     f.set(`metadata[${k}]`, v);
     if (mode === "subscription") f.set(`subscription_data[metadata][${k}]`, v);
@@ -212,12 +245,17 @@ export default {
     let body;
     try { body = await req.json(); } catch { return json({ error: "Bad request" }, 400, origin); }
     let form;
-    try { form = buildSession(body, env); } catch (e) { return json({ error: e.message }, 400, origin); }
-    const r = await fetch("https://api.stripe.com/v1/checkout/sessions", {
+    try { form = buildSession(body, env, true); } catch (e) { return json({ error: e.message }, 400, origin); }
+    const call = (f) => fetch("https://api.stripe.com/v1/checkout/sessions", {
       method: "POST",
       headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, "Content-Type": "application/x-www-form-urlencoded" },
-      body: form,
+      body: f,
     });
+    let r = await call(form);
+    if (!r.ok && form.has("metadata[detailer]")) {
+      // The detailer account may not be ready to receive money yet. Book without the split rather than lose the sale.
+      r = await call(buildSession(body, env, false));
+    }
     const s = await r.json();
     if (!r.ok) return json({ error: "Could not start checkout", detail: (s.error && s.error.message) || r.status }, 502, origin);
     return json({ url: s.url, clientSecret: s.client_secret, publishableKey: env.STRIPE_PUBLISHABLE_KEY || null }, 200, origin);
