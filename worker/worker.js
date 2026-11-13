@@ -50,7 +50,7 @@ const PRICING = {
    "popular": true,
    "includes": [
     "Everything in Renewal",
-    "Clay bar and wax or sealant",
+    "Wax or sealant",
     "Deep interior clean (carpets, seats, vents, crevices)",
     "Leather or vinyl conditioned",
     "Tire shine and trim dressing"

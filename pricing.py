@@ -23,7 +23,7 @@ PACKAGES = {  # individuals
     },
     "full": {
         "name": "Revival", "tag": "Most popular", "popular": True,
-        "includes": ["Everything in Renewal", "Clay bar and wax or sealant", "Deep interior clean (carpets, seats, vents, crevices)", "Leather or vinyl conditioned", "Tire shine and trim dressing"],
+        "includes": ["Everything in Renewal", "Wax or sealant", "Deep interior clean (carpets, seats, vents, crevices)", "Leather or vinyl conditioned", "Tire shine and trim dressing"],
         "prices": {"car": 250, "small_suv": 280, "truck": 300, "large_suv": 350}, "time": "about 3 to 4 hrs",
     },
     "premium": {
