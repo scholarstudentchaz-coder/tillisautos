@@ -69,15 +69,15 @@ const PRICING = {
    "includes": [
     "Everything in Revival",
     "Paint correction (one-step polish)",
-    "Ceramic coating for long-lasting gloss",
+    "3-year ceramic coating",
     "Headlight clean-up",
     "Engine bay cleaned and dressed"
    ],
    "prices": {
-    "car": 550,
-    "small_suv": 620,
-    "truck": 660,
-    "large_suv": 760
+    "car": 695,
+    "small_suv": 765,
+    "truck": 805,
+    "large_suv": 905
    },
    "time": "1 day"
   }

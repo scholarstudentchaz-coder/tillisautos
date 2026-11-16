@@ -28,8 +28,8 @@ PACKAGES = {  # individuals
     },
     "premium": {
         "name": "Restoration", "tag": "Maximum protection",
-        "includes": ["Everything in Revival", "Paint correction (one-step polish)", "Ceramic coating for long-lasting gloss", "Headlight clean-up", "Engine bay cleaned and dressed"],
-        "prices": {"car": 550, "small_suv": 620, "truck": 660, "large_suv": 760}, "time": "1 day",
+        "includes": ["Everything in Revival", "Paint correction (one-step polish)", "3-year ceramic coating", "Headlight clean-up", "Engine bay cleaned and dressed"],
+        "prices": {"car": 695, "small_suv": 765, "truck": 805, "large_suv": 905}, "time": "1 day",
     },
 }
 

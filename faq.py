@@ -3,7 +3,7 @@ FAQ = [
  ("Booking & scheduling", [
   ("How do I book?", "Use the Book page: choose your vehicle size, how dirty it is, and a package, then pay securely by card. We contact you to confirm the time. Prefer to talk? Call or text (310) 701-0263."),
   ("How far ahead should I book?", "Weekdays are usually easiest. Weekends and the weeks before holidays fill up first, so book a few days ahead when you can."),  # default
-  ("How long does a detail take?", "Renewal takes about 1.5 hours, Revival about 3 to 4 hours, and Restoration (with paint correction and ceramic coating) usually takes a full day. Larger or dirtier vehicles take longer."),
+  ("How long does a detail take?", "Renewal takes about 1.5 hours, Revival about 3 to 4 hours, and Restoration (with paint correction and a 3-year ceramic coating) usually takes a full day. Larger or dirtier vehicles take longer."),
   ("Can I reschedule?", "Yes. Please let us know at least 24 hours ahead so we can offer the slot to someone else."),  # default
   ("What if the weather is bad?", "Light overcast is fine. For rain or extreme heat we will move your appointment, or do interior work and finish the exterior another day."),  # default
  ]),
@@ -24,7 +24,7 @@ FAQ = [
  ("Packages & services", [
   ("Which package should I choose?", "Renewal is for cars that are already in decent shape. Revival is the best value for most people: a deep clean inside and out with wax. Restoration is for paint that needs correction and long-term protection with ceramic coating."),
   ("What is paint correction?", "A machine polish that removes light swirls, haze and oxidation so your paint looks deeper and glossier. It is part of our Restoration package. It cannot fix deep scratches that go through the clear coat."),
-  ("What is ceramic coating and how long does it last?", "Ceramic coating is included in our Restoration package. It is a liquid layer that bonds to your paint for strong gloss, water beading and easier cleaning. Real-world life depends on the product and how you care for the car. We will tell you what we are applying and its expected life."),
+  ("What is ceramic coating and how long does it last?", "Our Restoration package includes a 3-year ceramic coating. It is a liquid layer that bonds to your paint for strong gloss, water beading and easier cleaning. How long it lasts in real life also depends on how you care for the car, and we will send aftercare instructions."),
   ("Is there a cure time after ceramic coating?", "Yes. Keep the car dry for the first 24 hours if you can, and wait about a week before washing. We will send aftercare instructions."),
   ("Can you remove stains, odors and pet hair?", "Most stains, sand and pet hair come out. Select 'very dirty' and add pet hair removal if needed. Strong odors like smoke can often be reduced; we will be honest if something will not fully come out."),
   ("Do you do headlights and engine bays?", "Yes. Headlight restoration and engine bay cleaning are add-ons to Renewal and Revival, and both are already included in Restoration. Light scratches and swirls are handled by the paint correction in Restoration."),
